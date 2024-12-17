@@ -1,0 +1,4 @@
+.task/
+.idea/
+.vscode/
+.env

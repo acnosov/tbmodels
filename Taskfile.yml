@@ -1,0 +1,11 @@
+version: '3'
+
+tasks:
+  default:
+    desc: Go generate after changes
+    watch: true
+    sources:
+      - 'event.go'
+      - 'models.go'
+    cmds:
+      - go generate ./...
