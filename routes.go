@@ -24,4 +24,8 @@ const (
 	WebsocketWatchSubject        = "websocket.watch"
 	WebsocketUnwatchSubject      = "websocket.unwatch"
 	WebsocketSubscribedSubject   = "websocket.subscribed"
+	WebsocketConfigSubject       = "websocket.config"
+
+	StoreEventSubject    = "store.event.one"
+	StoreEventAllSubject = "store.event.all"
 )

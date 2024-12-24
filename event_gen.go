@@ -620,25 +620,25 @@ func (z *EventDB) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "CompetitionID")
 				return
 			}
-		case "i":
+		case "h":
 			z.HomeID, err = dc.ReadInt64()
 			if err != nil {
 				err = msgp.WrapError(err, "HomeID")
 				return
 			}
-		case "d":
+		case "a":
 			z.AwayID, err = dc.ReadInt64()
 			if err != nil {
 				err = msgp.WrapError(err, "AwayID")
 				return
 			}
-		case "id":
+		case "i":
 			z.ID, err = dc.ReadInt64()
 			if err != nil {
 				err = msgp.WrapError(err, "ID")
 				return
 			}
-		case "dt":
+		case "d":
 			z.EventDate, err = dc.ReadTime()
 			if err != nil {
 				err = msgp.WrapError(err, "EventDate")
@@ -656,6 +656,12 @@ func (z *EventDB) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "Offline")
 				return
 			}
+		case "l":
+			z.Live, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "Live")
+				return
+			}
 		default:
 			err = dc.Skip()
 			if err != nil {
@@ -669,9 +675,9 @@ func (z *EventDB) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *EventDB) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 9
+	// map header, size 10
 	// write "s"
-	err = en.Append(0x89, 0xa1, 0x73)
+	err = en.Append(0x8a, 0xa1, 0x73)
 	if err != nil {
 		return
 	}
@@ -700,8 +706,8 @@ func (z *EventDB) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "CompetitionID")
 		return
 	}
-	// write "i"
-	err = en.Append(0xa1, 0x69)
+	// write "h"
+	err = en.Append(0xa1, 0x68)
 	if err != nil {
 		return
 	}
@@ -710,8 +716,8 @@ func (z *EventDB) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "HomeID")
 		return
 	}
-	// write "d"
-	err = en.Append(0xa1, 0x64)
+	// write "a"
+	err = en.Append(0xa1, 0x61)
 	if err != nil {
 		return
 	}
@@ -720,8 +726,8 @@ func (z *EventDB) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "AwayID")
 		return
 	}
-	// write "id"
-	err = en.Append(0xa2, 0x69, 0x64)
+	// write "i"
+	err = en.Append(0xa1, 0x69)
 	if err != nil {
 		return
 	}
@@ -730,8 +736,8 @@ func (z *EventDB) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "ID")
 		return
 	}
-	// write "dt"
-	err = en.Append(0xa2, 0x64, 0x74)
+	// write "d"
+	err = en.Append(0xa1, 0x64)
 	if err != nil {
 		return
 	}
@@ -760,15 +766,25 @@ func (z *EventDB) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Offline")
 		return
 	}
+	// write "l"
+	err = en.Append(0xa1, 0x6c)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.Live)
+	if err != nil {
+		err = msgp.WrapError(err, "Live")
+		return
+	}
 	return
 }
 
 // MarshalMsg implements msgp.Marshaler
 func (z *EventDB) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 9
+	// map header, size 10
 	// string "s"
-	o = append(o, 0x89, 0xa1, 0x73)
+	o = append(o, 0x8a, 0xa1, 0x73)
 	o = msgp.AppendString(o, z.Sport)
 	// string "y"
 	o = append(o, 0xa1, 0x79)
@@ -776,17 +792,17 @@ func (z *EventDB) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "c"
 	o = append(o, 0xa1, 0x63)
 	o = msgp.AppendInt64(o, z.CompetitionID)
+	// string "h"
+	o = append(o, 0xa1, 0x68)
+	o = msgp.AppendInt64(o, z.HomeID)
+	// string "a"
+	o = append(o, 0xa1, 0x61)
+	o = msgp.AppendInt64(o, z.AwayID)
 	// string "i"
 	o = append(o, 0xa1, 0x69)
-	o = msgp.AppendInt64(o, z.HomeID)
+	o = msgp.AppendInt64(o, z.ID)
 	// string "d"
 	o = append(o, 0xa1, 0x64)
-	o = msgp.AppendInt64(o, z.AwayID)
-	// string "id"
-	o = append(o, 0xa2, 0x69, 0x64)
-	o = msgp.AppendInt64(o, z.ID)
-	// string "dt"
-	o = append(o, 0xa2, 0x64, 0x74)
 	o = msgp.AppendTime(o, z.EventDate)
 	// string "t"
 	o = append(o, 0xa1, 0x74)
@@ -794,6 +810,9 @@ func (z *EventDB) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "o"
 	o = append(o, 0xa1, 0x6f)
 	o = msgp.AppendBool(o, z.Offline)
+	// string "l"
+	o = append(o, 0xa1, 0x6c)
+	o = msgp.AppendBool(o, z.Live)
 	return
 }
 
@@ -833,25 +852,25 @@ func (z *EventDB) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "CompetitionID")
 				return
 			}
-		case "i":
+		case "h":
 			z.HomeID, bts, err = msgp.ReadInt64Bytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "HomeID")
 				return
 			}
-		case "d":
+		case "a":
 			z.AwayID, bts, err = msgp.ReadInt64Bytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "AwayID")
 				return
 			}
-		case "id":
+		case "i":
 			z.ID, bts, err = msgp.ReadInt64Bytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "ID")
 				return
 			}
-		case "dt":
+		case "d":
 			z.EventDate, bts, err = msgp.ReadTimeBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "EventDate")
@@ -869,6 +888,12 @@ func (z *EventDB) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "Offline")
 				return
 			}
+		case "l":
+			z.Live, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Live")
+				return
+			}
 		default:
 			bts, err = msgp.Skip(bts)
 			if err != nil {
@@ -883,7 +908,94 @@ func (z *EventDB) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *EventDB) Msgsize() (s int) {
-	s = 1 + 2 + msgp.StringPrefixSize + len(z.Sport) + 2 + msgp.StringPrefixSize + len(z.Country) + 2 + msgp.Int64Size + 2 + msgp.Int64Size + 2 + msgp.Int64Size + 3 + msgp.Int64Size + 3 + msgp.TimeSize + 2 + msgp.TimeSize + 2 + msgp.BoolSize
+	s = 1 + 2 + msgp.StringPrefixSize + len(z.Sport) + 2 + msgp.StringPrefixSize + len(z.Country) + 2 + msgp.Int64Size + 2 + msgp.Int64Size + 2 + msgp.Int64Size + 2 + msgp.Int64Size + 2 + msgp.TimeSize + 2 + msgp.TimeSize + 2 + msgp.BoolSize + 2 + msgp.BoolSize
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
+func (z *EventDBList) DecodeMsg(dc *msgp.Reader) (err error) {
+	var zb0002 uint32
+	zb0002, err = dc.ReadArrayHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if cap((*z)) >= int(zb0002) {
+		(*z) = (*z)[:zb0002]
+	} else {
+		(*z) = make(EventDBList, zb0002)
+	}
+	for zb0001 := range *z {
+		err = (*z)[zb0001].DecodeMsg(dc)
+		if err != nil {
+			err = msgp.WrapError(err, zb0001)
+			return
+		}
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z EventDBList) EncodeMsg(en *msgp.Writer) (err error) {
+	err = en.WriteArrayHeader(uint32(len(z)))
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	for zb0003 := range z {
+		err = z[zb0003].EncodeMsg(en)
+		if err != nil {
+			err = msgp.WrapError(err, zb0003)
+			return
+		}
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z EventDBList) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	o = msgp.AppendArrayHeader(o, uint32(len(z)))
+	for zb0003 := range z {
+		o, err = z[zb0003].MarshalMsg(o)
+		if err != nil {
+			err = msgp.WrapError(err, zb0003)
+			return
+		}
+	}
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *EventDBList) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var zb0002 uint32
+	zb0002, bts, err = msgp.ReadArrayHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	if cap((*z)) >= int(zb0002) {
+		(*z) = (*z)[:zb0002]
+	} else {
+		(*z) = make(EventDBList, zb0002)
+	}
+	for zb0001 := range *z {
+		bts, err = (*z)[zb0001].UnmarshalMsg(bts)
+		if err != nil {
+			err = msgp.WrapError(err, zb0001)
+			return
+		}
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z EventDBList) Msgsize() (s int) {
+	s = msgp.ArrayHeaderSize
+	for zb0003 := range z {
+		s += z[zb0003].Msgsize()
+	}
 	return
 }
 
@@ -1089,28 +1201,10 @@ func (z *EventWatch) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "CompetitionID")
 				return
 			}
-		case "s":
-			z.Sport, err = dc.ReadString()
+		case "k":
+			err = z.EventKey.DecodeMsg(dc)
 			if err != nil {
-				err = msgp.WrapError(err, "Sport")
-				return
-			}
-		case "d":
-			z.EventDate, err = dc.ReadTime()
-			if err != nil {
-				err = msgp.WrapError(err, "EventDate")
-				return
-			}
-		case "h":
-			z.HomeID, err = dc.ReadInt64()
-			if err != nil {
-				err = msgp.WrapError(err, "HomeID")
-				return
-			}
-		case "a":
-			z.AwayID, err = dc.ReadInt64()
-			if err != nil {
-				err = msgp.WrapError(err, "AwayID")
+				err = msgp.WrapError(err, "EventKey")
 				return
 			}
 		default:
@@ -1126,9 +1220,9 @@ func (z *EventWatch) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *EventWatch) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 5
+	// map header, size 2
 	// write "c"
-	err = en.Append(0x85, 0xa1, 0x63)
+	err = en.Append(0x82, 0xa1, 0x63)
 	if err != nil {
 		return
 	}
@@ -1137,44 +1231,14 @@ func (z *EventWatch) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "CompetitionID")
 		return
 	}
-	// write "s"
-	err = en.Append(0xa1, 0x73)
+	// write "k"
+	err = en.Append(0xa1, 0x6b)
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.Sport)
+	err = z.EventKey.EncodeMsg(en)
 	if err != nil {
-		err = msgp.WrapError(err, "Sport")
-		return
-	}
-	// write "d"
-	err = en.Append(0xa1, 0x64)
-	if err != nil {
-		return
-	}
-	err = en.WriteTime(z.EventDate)
-	if err != nil {
-		err = msgp.WrapError(err, "EventDate")
-		return
-	}
-	// write "h"
-	err = en.Append(0xa1, 0x68)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt64(z.HomeID)
-	if err != nil {
-		err = msgp.WrapError(err, "HomeID")
-		return
-	}
-	// write "a"
-	err = en.Append(0xa1, 0x61)
-	if err != nil {
-		return
-	}
-	err = en.WriteInt64(z.AwayID)
-	if err != nil {
-		err = msgp.WrapError(err, "AwayID")
+		err = msgp.WrapError(err, "EventKey")
 		return
 	}
 	return
@@ -1183,22 +1247,17 @@ func (z *EventWatch) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *EventWatch) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 5
+	// map header, size 2
 	// string "c"
-	o = append(o, 0x85, 0xa1, 0x63)
+	o = append(o, 0x82, 0xa1, 0x63)
 	o = msgp.AppendInt64(o, z.CompetitionID)
-	// string "s"
-	o = append(o, 0xa1, 0x73)
-	o = msgp.AppendString(o, z.Sport)
-	// string "d"
-	o = append(o, 0xa1, 0x64)
-	o = msgp.AppendTime(o, z.EventDate)
-	// string "h"
-	o = append(o, 0xa1, 0x68)
-	o = msgp.AppendInt64(o, z.HomeID)
-	// string "a"
-	o = append(o, 0xa1, 0x61)
-	o = msgp.AppendInt64(o, z.AwayID)
+	// string "k"
+	o = append(o, 0xa1, 0x6b)
+	o, err = z.EventKey.MarshalMsg(o)
+	if err != nil {
+		err = msgp.WrapError(err, "EventKey")
+		return
+	}
 	return
 }
 
@@ -1226,28 +1285,10 @@ func (z *EventWatch) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "CompetitionID")
 				return
 			}
-		case "s":
-			z.Sport, bts, err = msgp.ReadStringBytes(bts)
+		case "k":
+			bts, err = z.EventKey.UnmarshalMsg(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "Sport")
-				return
-			}
-		case "d":
-			z.EventDate, bts, err = msgp.ReadTimeBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "EventDate")
-				return
-			}
-		case "h":
-			z.HomeID, bts, err = msgp.ReadInt64Bytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "HomeID")
-				return
-			}
-		case "a":
-			z.AwayID, bts, err = msgp.ReadInt64Bytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "AwayID")
+				err = msgp.WrapError(err, "EventKey")
 				return
 			}
 		default:
@@ -1264,6 +1305,6 @@ func (z *EventWatch) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *EventWatch) Msgsize() (s int) {
-	s = 1 + 2 + msgp.Int64Size + 2 + msgp.StringPrefixSize + len(z.Sport) + 2 + msgp.TimeSize + 2 + msgp.Int64Size + 2 + msgp.Int64Size
+	s = 1 + 2 + msgp.Int64Size + 2 + z.EventKey.Msgsize()
 	return
 }

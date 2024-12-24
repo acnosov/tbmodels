@@ -27,7 +27,6 @@ type Event struct {
 }
 
 type EventKey struct {
-	//CompetitionID int64  `msg:"c"`
 	Sport     string `msg:"s"`
 	EventDate int64  `msg:"d"`
 	HomeID    int64  `msg:"h"`
@@ -38,13 +37,16 @@ type EventDB struct {
 	Sport         string    `msg:"s" json:"sport"`
 	Country       string    `msg:"y" json:"country"`
 	CompetitionID int64     `msg:"c" json:"competition_id"`
-	HomeID        int64     `msg:"i" json:"home_id"`
-	AwayID        int64     `msg:"d" json:"away_id"`
-	ID            int64     `msg:"id" json:"id"`
-	EventDate     time.Time `msg:"dt" json:"event_date"`
+	HomeID        int64     `msg:"h" json:"home_id"`
+	AwayID        int64     `msg:"a" json:"away_id"`
+	ID            int64     `msg:"i" json:"id"`
+	EventDate     time.Time `msg:"d" json:"event_date"`
 	Starts        time.Time `msg:"t" json:"starts"`
 	Offline       bool      `msg:"o" json:"offline"`
+	Live          bool      `msg:"l" json:"live"`
 }
+
+type EventDBList []EventDB
 
 func (e *EventDB) EventID() string {
 	return fmt.Sprintf("%s,%d,%d", e.EventDate.Format("2006-01-02"), e.HomeID, e.AwayID)
@@ -55,11 +57,8 @@ func (e *EventDB) Key() EventKey {
 }
 
 type EventWatch struct {
-	CompetitionID int64     `msg:"c"`
-	Sport         string    `msg:"s"`
-	EventDate     time.Time `msg:"d"`
-	HomeID        int64     `msg:"h"`
-	AwayID        int64     `msg:"a"`
+	CompetitionID int64 `msg:"c"`
+	EventKey      `msg:"k"`
 }
 
 //func (e *EventWatch) Watch() []byte {
@@ -83,13 +82,14 @@ type EventWatch struct {
 //	}
 
 func (e *EventWatch) Watch() []byte {
+	ed := time.Unix(e.EventDate, 0).UTC().Format("2006-01-02")
 	out := make([]byte, 0, 70)
 	out = append(out, '[', '"', 'w', 'a', 't', 'c', 'h', '_', 'e', 'v', 'e', 'n', 't', '"', ',', '[')
 	out = append(out, strconv.AppendInt(nil, e.CompetitionID, 10)...)
 	out = append(out, ',', '"')
 	out = append(out, e.Sport...)
 	out = append(out, '"', ',', '"')
-	out = append(out, e.EventDate.Format("2006-01-02")...)
+	out = append(out, ed...)
 	out = append(out, ',')
 	out = append(out, strconv.AppendInt(nil, e.HomeID, 10)...)
 	out = append(out, ',')
@@ -100,13 +100,15 @@ func (e *EventWatch) Watch() []byte {
 }
 
 func (e *EventWatch) Unwatch() []byte {
+	ed := time.Unix(e.EventDate, 0).UTC().Format("2006-01-02")
+
 	out := make([]byte, 0, 70)
 	out = append(out, '[', '"', 'u', 'n', 'w', 'a', 't', 'c', 'h', '_', 'e', 'v', 'e', 'n', 't', '"', ',', '[')
 	out = append(out, strconv.AppendInt(nil, e.CompetitionID, 10)...)
 	out = append(out, ',', '"')
 	out = append(out, e.Sport...)
 	out = append(out, '"', ',', '"')
-	out = append(out, e.EventDate.Format("2006-01-02")...)
+	out = append(out, ed...)
 	out = append(out, ',')
 	out = append(out, strconv.AppendInt(nil, e.HomeID, 10)...)
 	out = append(out, ',')
@@ -115,3 +117,20 @@ func (e *EventWatch) Unwatch() []byte {
 
 	return out
 }
+
+// type EventWithScore struct {
+// 	Sport         string    `msg:"s" json:"sport"`
+// 	Country       string    `msg:"y" json:"country"`
+// 	CompetitionID int64     `msg:"c" json:"competition_id"`
+// 	HomeID        int64     `msg:"i" json:"home_id"`
+// 	AwayID        int64     `msg:"d" json:"away_id"`
+// 	ID            int64     `msg:"id" json:"id"`
+// 	EventDate     time.Time `msg:"dt" json:"-"`
+// 	Starts        time.Time `msg:"t" json:"starts"`
+// 	Offline       bool      `msg:"o" json:"offline"`
+// 	Live          bool      `msg:"l" json:"live"`
+// }
+
+// func (e EventWithScore) EventID() string {
+// 	return fmt.Sprintf("%s,%d,%d", e.EventDate.Format("2006-01-02"), e.HomeID, e.AwayID)
+// }

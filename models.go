@@ -1,6 +1,9 @@
 package tbmodels
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 //go:generate msgp
 
@@ -9,6 +12,25 @@ type User struct {
 	Username  string `msg:"u" json:"username"`
 	SessionID string `msg:"s" json:"-"`
 	Active    bool   `msg:"a" json:"active"`
+}
+
+type DynamicConfigRequest struct {
+	Username string `msg:"u" json:"username"`
+}
+
+type DynamicConfigResponse struct {
+	User      User   `msg:"u" json:"user"`
+	UserAgent string `msg:"a" json:"user_agent"`
+	Error     *Error `msg:"e" json:"error,omitempty"`
+}
+
+type Error struct {
+	Code uint16 `msg:"c" json:"code"`
+	Msg  string `msg:"m" json:"msg"`
+}
+
+func (e Error) Error() string {
+	return fmt.Sprintf("status:%d, msg:%s", e.Code, e.Msg)
 }
 
 type BalanceMessage struct {
@@ -33,9 +55,10 @@ type InfoMessage struct {
 	TS               float64 `msg:"t" json:"ts"`
 }
 type OffersMessage struct {
-	EventID   int64     `msg:"e" json:"event_id"`
-	Starts    time.Time `msg:"s" json:"starts"`
-	Sport     string    `msg:"p" json:"sport"`
+	// EventID   int64     `msg:"e" json:"event_id"`
+	// Starts    time.Time `msg:"s" json:"starts"`
+	// Sport     string    `msg:"p" json:"sport"`
+	EventKey  EventKey  `msg:"k" json:"event_key"`
 	WsReceive time.Time `msg:"w" json:"ws_receive"`
 	OfferList []Offer   `msg:"o" json:"offer_list"`
 	//SendTime  time.Time `msg:"t"`
@@ -78,8 +101,8 @@ type BetslipMessage struct {
 	//SendTime              time.Time
 }
 type Status struct {
-	Code   string `json:"code"`
-	Reason string `json:"reason"`
+	Code   string `msg:"c" json:"code"`
+	Reason string `msg:"r" json:"reason"`
 }
 
 type PmmMessage struct {
@@ -185,15 +208,35 @@ type Result struct {
 }
 
 type Offer struct {
-	A float64 `json:"a"`
-	B float64 `json:"b"`
-	C float64 `json:"c"`
-	I int64   `json:"i"`
-	N string  `json:"n"`
+	A float64 `msg:"a" json:"a"`
+	B float64 `msg:"b" json:"b"`
+	C float64 `msg:"c" json:"c"`
+	I int64   `msg:"i" json:"i"`
+	N string  `msg:"n" json:"n"`
 }
 
 type SyncedMessage struct {
 	User   string `msg:"u" json:"user"`
 	OpenTS int64  `msg:"o" json:"open_ts"`
 	WsTS   int64  `msg:"w" json:"ws_ts"`
+}
+
+type Timing struct {
+	WsReceive       time.Time
+	BeforeProcess   time.Time
+	BeginOpen       time.Time
+	EndOpen         time.Time
+	StartJob        time.Time
+	Complete        time.Time
+	BeginPlaceFirst time.Time
+	ConditionsOk    time.Time
+	BeginFirstBet   time.Time
+	EndFirstBet     time.Time
+	StartCheck      time.Time
+	BeginSecondBet  time.Time
+	EndSecondBet    time.Time
+	BeginStats      time.Time
+	EndStats        time.Time
+	BeforeSubmit    time.Time
+	BeginExit       time.Time
 }
