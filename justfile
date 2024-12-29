@@ -3,3 +3,4 @@ default:
 
 gen:
     go generate ./...
+    go test -v
