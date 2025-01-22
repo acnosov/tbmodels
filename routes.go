@@ -1,31 +1,50 @@
 package tbmodels
 
+// Subject srtucture: Producer.EventType
 const (
-	EventMessageType         = "event"
-	XrateMessageType         = "xrate"
-	BalanceMessageType       = "balance"
-	OfferMessageType         = "offer"
-	InfoMessageType          = "info"
-	BetslipMessageType       = "betslip"
-	PmmMessageType           = "pmm"
-	SyncMessageType          = "sync"
-	SyncedMessageType        = "synced"
-	BetslipClosedMessageType = "betslip_closed"
-	OrderMessageType         = "order"
-	BetMessageType           = "bet"
-
-	UserNatsSubject = "user"
-
-	UnsubscribeEventMessageType    = "unsubscribe_event"
-	SubscribeEventMessageType      = "subscribe_event"
-	UnsubscribeAllEventMessageType = "unsubscribe_all_event"
+	WebsocketEventSubject         = "websocket.event"
+	WebsocketXrateSubject         = "websocket.xrate"
+	WebsocketBalanceSubject       = "websocket.balance"
+	WebsocketOfferSubject         = "websocket.offer"
+	WebsocketInfoSubject          = "websocket.info"
+	WebsocketBetslipSubject       = "websocket.betslip"
+	WebsocketPmmSubject           = "websocket.pmm"
+	WebsocketSyncSubject          = "websocket.sync"
+	WebsocketSyncedSubject        = "websocket.synced"
+	WebsocketBetslipClosedSubject = "websocket.betslip_closed"
+	WebsocketOrderSubject         = "websocket.order"
+	WebsocketBetSubject           = "websocket.bet"
 
 	WebsocketDisconnectedSubject = "websocket.disconnected"
-	WebsocketWatchSubject        = "websocket.watch"
-	WebsocketUnwatchSubject      = "websocket.unwatch"
 	WebsocketSubscribedSubject   = "websocket.subscribed"
-	WebsocketConfigSubject       = "websocket.config"
 
-	StoreEventSubject    = "store.event.one"
-	StoreEventAllSubject = "store.event.all"
+	ServicePingSubject         = "service.ping"
+	ServicePongSubject         = "service.pong"
+	ServiceUpSubject           = "service.up"
+	ServiceDownSubject         = "service.down"
+	ServiceInitializedSubject  = "service.initialized"
+	ServiceNotificationSubject = "service.notification"
+
+	StoreWatchSubject     = "store.watch."
+	StoreUnwatchSubject   = "store.unwatch."
+	StoreEventSubject     = "store.event.one"
+	StoreEventAllSubject  = "store.event.all"
+	StoreSettingsSubject  = "store.settings"
+	StoreBalanceSubject   = "store.balance"
+	StoreUserSubject      = "store.user"
+	StoreXrateSubject     = "store.xrate"
+	StoreBetConfigSubject = "store.bet_config"
+	StoreStatsSubject     = "store.stats"
+
+	ResultsOrdersSubject = "results.orders"
+
+	TradebotSurebetSubject = "tradebot.surebet"
 )
+
+// UserNatsSubject = "user"
+// ServiceSettingsSubject = "service.settings"
+// ServiceDisconnectedSubject = "service.disconnected"
+// UnsubscribeEventMessageType    = "unsubscribe_event"
+// SubscribeEventMessageType      = "subscribe_event"
+// UnsubscribeAllEventMessageType = "unsubscribe_all_event"
+// WebsocketConfigSubject       = "websocket.config"
