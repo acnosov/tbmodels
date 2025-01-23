@@ -7261,15 +7261,21 @@ func (z *ServiceMessage) DecodeMsg(dc *msgp.Reader) (err error) {
 				return
 			}
 		case "u":
-			z.User, err = dc.ReadString()
+			z.Username, err = dc.ReadString()
 			if err != nil {
-				err = msgp.WrapError(err, "User")
+				err = msgp.WrapError(err, "Username")
 				return
 			}
 		case "t":
 			z.TS, err = dc.ReadInt64()
 			if err != nil {
 				err = msgp.WrapError(err, "TS")
+				return
+			}
+		case "i":
+			z.IsUp, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "IsUp")
 				return
 			}
 		default:
@@ -7285,9 +7291,9 @@ func (z *ServiceMessage) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *ServiceMessage) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 5
+	// map header, size 6
 	// write "n"
-	err = en.Append(0x85, 0xa1, 0x6e)
+	err = en.Append(0x86, 0xa1, 0x6e)
 	if err != nil {
 		return
 	}
@@ -7321,9 +7327,9 @@ func (z *ServiceMessage) EncodeMsg(en *msgp.Writer) (err error) {
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.User)
+	err = en.WriteString(z.Username)
 	if err != nil {
-		err = msgp.WrapError(err, "User")
+		err = msgp.WrapError(err, "Username")
 		return
 	}
 	// write "t"
@@ -7336,15 +7342,25 @@ func (z *ServiceMessage) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "TS")
 		return
 	}
+	// write "i"
+	err = en.Append(0xa1, 0x69)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.IsUp)
+	if err != nil {
+		err = msgp.WrapError(err, "IsUp")
+		return
+	}
 	return
 }
 
 // MarshalMsg implements msgp.Marshaler
 func (z *ServiceMessage) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 5
+	// map header, size 6
 	// string "n"
-	o = append(o, 0x85, 0xa1, 0x6e)
+	o = append(o, 0x86, 0xa1, 0x6e)
 	o = msgp.AppendString(o, z.Name)
 	// string "v"
 	o = append(o, 0xa1, 0x76)
@@ -7354,10 +7370,13 @@ func (z *ServiceMessage) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.AppendString(o, z.Status)
 	// string "u"
 	o = append(o, 0xa1, 0x75)
-	o = msgp.AppendString(o, z.User)
+	o = msgp.AppendString(o, z.Username)
 	// string "t"
 	o = append(o, 0xa1, 0x74)
 	o = msgp.AppendInt64(o, z.TS)
+	// string "i"
+	o = append(o, 0xa1, 0x69)
+	o = msgp.AppendBool(o, z.IsUp)
 	return
 }
 
@@ -7398,15 +7417,21 @@ func (z *ServiceMessage) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				return
 			}
 		case "u":
-			z.User, bts, err = msgp.ReadStringBytes(bts)
+			z.Username, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "User")
+				err = msgp.WrapError(err, "Username")
 				return
 			}
 		case "t":
 			z.TS, bts, err = msgp.ReadInt64Bytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "TS")
+				return
+			}
+		case "i":
+			z.IsUp, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "IsUp")
 				return
 			}
 		default:
@@ -7423,7 +7448,7 @@ func (z *ServiceMessage) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *ServiceMessage) Msgsize() (s int) {
-	s = 1 + 2 + msgp.StringPrefixSize + len(z.Name) + 2 + msgp.StringPrefixSize + len(z.Version) + 2 + msgp.StringPrefixSize + len(z.Status) + 2 + msgp.StringPrefixSize + len(z.User) + 2 + msgp.Int64Size
+	s = 1 + 2 + msgp.StringPrefixSize + len(z.Name) + 2 + msgp.StringPrefixSize + len(z.Version) + 2 + msgp.StringPrefixSize + len(z.Status) + 2 + msgp.StringPrefixSize + len(z.Username) + 2 + msgp.Int64Size + 2 + msgp.BoolSize
 	return
 }
 
