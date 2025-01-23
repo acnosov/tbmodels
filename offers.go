@@ -154,8 +154,21 @@ var OfferMap = map[string]AB{
 
 	// handicaps are applied to the total number of games won in the 1st set.
 	"tennis_ah,1,game": {B: "tset,1,vwhatever,game,ah,p2", A: "tset,1,vwhatever,game,ah,p1", Short: "h1s", Kind: Handicap},
+	"tennis_ah,2,game": {B: "tset,2,vwhatever,game,ah,p2", A: "tset,2,vwhatever,game,ah,p1", Short: "h2s", Kind: Handicap},
+	"tennis_ah,3,game": {B: "tset,3,vwhatever,game,ah,p2", A: "tset,3,vwhatever,game,ah,p1", Short: "h3s", Kind: Handicap},
+	"tennis_ah,4,game": {B: "tset,4,vwhatever,game,ah,p2", A: "tset,4,vwhatever,game,ah,p1", Short: "h4s", Kind: Handicap},
+	"tennis_ah,5,game": {B: "tset,5,vwhatever,game,ah,p2", A: "tset,5,vwhatever,game,ah,p1", Short: "h5s", Kind: Handicap},
+	"tennis_ah,6,game": {B: "tset,6,vwhatever,game,ah,p2", A: "tset,6,vwhatever,game,ah,p1", Short: "h6s", Kind: Handicap},
+	"tennis_ah,7,game": {B: "tset,7,vwhatever,game,ah,p2", A: "tset,7,vwhatever,game,ah,p1", Short: "h7s", Kind: Handicap},
+
 	// This market involves predicting whether the total number of games played in the first set will be over or under a specified number.
 	"tennis_ahou,1,game": {B: "tset,1,vwhatever,game,ahunder", A: "tset,1,vwhatever,game,ahover", Short: "t1s", Kind: Handicap},
+	"tennis_ahou,2,game": {B: "tset,2,vwhatever,game,ahunder", A: "tset,2,vwhatever,game,ahover", Short: "t2s", Kind: Handicap},
+	"tennis_ahou,3,game": {B: "tset,3,vwhatever,game,ahunder", A: "tset,3,vwhatever,game,ahover", Short: "t3s", Kind: Handicap},
+	"tennis_ahou,4,game": {B: "tset,4,vwhatever,game,ahunder", A: "tset,4,vwhatever,game,ahover", Short: "t4s", Kind: Handicap},
+	"tennis_ahou,5,game": {B: "tset,5,vwhatever,game,ahunder", A: "tset,5,vwhatever,game,ahover", Short: "t5s", Kind: Handicap},
+	"tennis_ahou,6,game": {B: "tset,6,vwhatever,game,ahunder", A: "tset,6,vwhatever,game,ahover", Short: "t6s", Kind: Handicap},
+	"tennis_ahou,7,game": {B: "tset,7,vwhatever,game,ahunder", A: "tset,7,vwhatever,game,ahover", Short: "t7s", Kind: Handicap},
 	// asian over/under (all sets)
 	"tennis_ahou,all,set": {B: "tset,all,vwhatever,set,ahunder", A: "tset,all,vwhatever,set,ahover", Short: "ts", Kind: Handicap},
 	// bettors predict the total number of games played throughout the entire match, with Asian handicap options available.
