@@ -274,7 +274,10 @@ type OrdersMessage struct {
 type ServiceMessage struct {
 	Name    string `msg:"n" json:"name"`
 	Version string `msg:"v" json:"version"`
+	Status  string `msg:"s" json:"status"`
+	User    string `msg:"u" json:"user,omitempty"`
 	TS      int64  `msg:"t" json:"ts,omitempty"`
+	IsUp    bool   `msg:"i" json:"is_up"`
 }
 
 type PingMessage struct{}
