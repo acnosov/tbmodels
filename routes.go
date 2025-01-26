@@ -14,16 +14,15 @@ const (
 	WebsocketBetslipClosedSubject = "websocket.betslip_closed"
 	WebsocketOrderSubject         = "websocket.order"
 	WebsocketBetSubject           = "websocket.bet"
-
-	WebsocketDisconnectedSubject = "websocket.disconnected"
-	WebsocketSubscribedSubject   = "websocket.subscribed"
+	WebsocketDisconnectedSubject  = "websocket.disconnected"
+	WebsocketSubscribedSubject    = "websocket.subscribed"
 
 	ServicePingSubject         = "service.ping"
 	ServicePongSubject         = "service.pong"
-	ServiceUpSubject           = "service.up"
-	ServiceDownSubject         = "service.down"
-	ServiceInitializedSubject  = "service.initialized"
 	ServiceNotificationSubject = "service.notification"
+	// ServiceUpSubject           = "service.up"
+	// ServiceDownSubject         = "service.down"
+	// ServiceInitializedSubject  = "service.initialized"
 
 	StoreWatchSubject     = "store.watch."
 	StoreUnwatchSubject   = "store.unwatch."
