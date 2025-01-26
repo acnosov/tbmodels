@@ -7,93 +7,105 @@ import (
 //go:generate msgp
 
 type SurebetDB struct {
-	ID            int64   // Uniq ID for save to db, set before first bet
-	Spread        float64 // Spread from original prices, set in processOffers
-	Key           string  // Key from EventID and surebet type, set in processOffers
-	Volume        int16   // Volume for save to db, set after first bet
-	IntervalCount int16   // How many surebets in 3s, set in processSurebet, record to db
-	// BeforeEvent int16  // Minutes before event
-	// Name        string // Origin surebet name for filter noCheckBetTypeMap
-	EventID     int32 // Event with score from db, set only in service, getEvent
-	EventStarts time.Time
-	EventSport  string
-
-	CalcProfit            float64
-	CalcGross             float64 //numeric
-	CalcWinDiffPercent    float64 //numeric
-	CalcBeforeEvent       int16
+	EventStarts           time.Time
+	Key                   string
+	CalcFirstReason       string
+	EventSport            string
+	Members               [2]Side
+	Timing                Timing
 	CalcLastDataTs        int64
-	CalcFirstIndex        int16 //smallint
-	CalcSecondIndex       int16 //smallint
-	CalcLowerWinIndex     int16 //smallint
-	CalcHigherWinIndex    int16 //smallint
+	CalcProfit            float64
+	CalcGross             float64
+	CalcWinDiffPercent    float64
+	Spread                float64
+	ID                    int64
+	EventID               int32
+	StatsAmountLine       int32
+	StatsAmountEvent      int32
 	CalcLeftBackupProfit  int16
+	CalcHigherWinIndex    int16
+	CalcLowerWinIndex     int16
 	CalcRightBackupProfit int16
 	CalcBackupProfit      int16
-	CalcFirstReason       string
-	StatsCountEvent       int16 //smallint
-	StatsCountLine        int16 //smallint
-	StatsAmountEvent      int32 //integer
-	StatsAmountLine       int32 //integer
-
-	Timing  Timing // Timing for save time of operations
-	Members [2]Side
+	IntervalCount         int16
+	StatsCountEvent       int16
+	StatsCountLine        int16
+	CalcSecondIndex       int16
+	CalcFirstIndex        int16
+	Volume                int16
+	CalcBeforeEvent       int16
 }
 
 type Side struct {
-	Index       int16
-	BetName     string
-	Price       float64
-	Xrate       float64
-	UserID      uint8
-	Bookie      string
-	CheckPrice  float64
-	CheckMin    float64
-	CheckMax    float64
-	Offers      int16
-	IsComplete  bool
-	CreatedAt   time.Time
-	LastData    time.Time
-	Age         int16
-	BackupPrice float64
-	PriceCount  int16
-	BackupCount int16
-
-	MinStake         float64
-	MaxStake         float64
-	BetPrice         float64
-	BetStake         float64
-	IsFirst          bool
-	MinWin           float64
-	MaxWin           float64
-	BetWin           float64
-	FreeBalance      float64
-	FillFactor       float64
-	EventFactor      float64
-	VoidFactor       float64
-	StatsFactor      float64
-	ProfitMultiplier float64
-	WeightedPrice    float64
-	WeightedVolume   float64
-	WeightedDistance float64
-	MinPercent       float64
-	MaxPercent       float64
-	MaxReason        string
-
-	OrderID     int32
-	TryBetCount int16
-	OrderPrice  float64
-	OrderStake  float64
-	OrderStatus string
-	CloseReason string
-
-	PriceList []Price
+	CreatedAt        time.Time `msg:"ca"`
+	LastData         time.Time `msg:"l"`
+	BetName          string    `msg:"n"`
+	CloseReason      string    `msg:"cr"`
+	OrderStatus      string    `msg:"os"`
+	Bookie           string    `msg:"b"`
+	MaxReason        string    `msg:"r"`
+	PriceList        []Price   `msg:"q"`
+	MinWin           float64   `msg:"w"`
+	FreeBalance      float64   `msg:"F"`
+	Price            float64   `msg:"p"`
+	CheckMax         float64   `msg:"M"`
+	CheckMin         float64   `msg:"m"`
+	Xrate            float64   `msg:"x"`
+	BackupPrice      float64   `msg:"B"`
+	OrderStake       float64   `msg:"s"`
+	OrderPrice       float64   `msg:"T"`
+	MinStake         float64   `msg:"S"`
+	MaxStake         float64   `msg:"h"`
+	BetPrice         float64   `msg:"N"`
+	BetStake         float64   `msg:"j"`
+	CheckPrice       float64   `msg:"c"`
+	MaxPercent       float64   `msg:"X"`
+	MaxWin           float64   `msg:"W"`
+	BetWin           float64   `msg:"O"`
+	MinPercent       float64   `msg:"Y"`
+	FillFactor       float64   `msg:"R"`
+	EventFactor      float64   `msg:"e"`
+	VoidFactor       float64   `msg:"V"`
+	StatsFactor      float64   `msg:"sf"`
+	ProfitMultiplier float64   `msg:"U"`
+	WeightedPrice    float64   `msg:"Z"`
+	WeightedVolume   float64   `msg:"v"`
+	WeightedDistance float64   `msg:"d"`
+	OrderID          int32     `msg:"Q"`
+	Offers           int16     `msg:"o"`
+	Index            int16     `msg:"i"`
+	TryBetCount      int16     `msg:"t"`
+	BackupCount      int16     `msg:"k"`
+	PriceCount       int16     `msg:"P"`
+	Age              int16     `msg:"a"`
+	IsFirst          bool      `msg:"f"`
+	UserID           uint8     `msg:"u"`
+	IsComplete       bool      `msg:"g"`
 }
 type Price struct {
-	Bookie string  `json:"bookie,omitempty"`
-	Price  float64 `json:"price,omitempty"`
-	Min    float64 `json:"min,omitempty"`
-	Max    float64 `json:"max,omitempty"`
-	TS     int64   `json:"ts"`
-	IsBest bool    `json:"-"`
+	Bookie string  `msg:"b" json:"bookie,omitempty"`
+	Price  float64 `msg:"p" json:"price,omitempty"`
+	Min    float64 `msg:"m" json:"min,omitempty"`
+	Max    float64 `msg:"M" json:"max,omitempty"`
+	TS     int64   `msg:"t" json:"ts"`
+	IsBest bool    `msg:"-" json:"-"`
+}
+type Timing struct {
+	WsReceive          int64 `msg:"r" json:"ws_receive,omitempty"`
+	BeginProcess       int64 `msg:"p" json:"begin_process,omitempty"`
+	BeginSubmit        int64 `msg:"u" json:"begin_submit,omitempty"`
+	BeginJob           int64 `msg:"j" json:"begin_job,omitempty"`
+	BeginOpen          int64 `msg:"o" json:"begin_open,omitempty"`
+	EndOpen            int64 `msg:"e" json:"end_open,omitempty"`
+	BeginCheck         int64 `msg:"s" json:"begin_check,omitempty"`
+	BeginStats         int64 `msg:"t" json:"begin_stats,omitempty"`
+	EndStats           int64 `msg:"a" json:"end_stats,omitempty"`
+	FirstComplete      int64 `msg:"c" json:"first_complete,omitempty"`
+	ConditionsOk       int64 `msg:"k" json:"conditions_ok,omitempty"`
+	BeginFirstBet      int64 `msg:"b" json:"begin_first_bet,omitempty"`
+	EndFirstBet        int64 `msg:"n" json:"end_first_bet,omitempty"`
+	BeginCalcSecondBet int64 `msg:"f" json:"begin_calc_second_bet,omitempty"`
+	BeginSecondBet     int64 `msg:"d" json:"begin_second_bet,omitempty"`
+	EndSecondBet       int64 `msg:"m" json:"end_second_bet,omitempty"`
+	BeginExit          int64 `msg:"x" json:"begin_exit,omitempty"`
 }
