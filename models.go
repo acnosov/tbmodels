@@ -101,6 +101,15 @@ type OffersMessage struct {
 	WsReceive int64    `msg:"w" json:"ws_receive"`
 }
 
+type Offer struct {
+	N string  `msg:"n" json:"n"`
+	A float64 `msg:"a" json:"a"`
+	B float64 `msg:"b" json:"b"`
+	C float64 `msg:"c" json:"c"`
+	S float64 `msg:"s" json:"s"`
+	I int16   `msg:"i" json:"i"`
+}
+
 type BetslipClosedMessage struct {
 	BetslipId   string `msg:"b" json:"betslip_id"`
 	CloseReason string `msg:"c" json:"close_reason"`
@@ -253,13 +262,6 @@ type BetMessage struct {
 	OrderID      int32         `msg:"o" json:"order_id"`
 }
 
-type Offer struct {
-	N string  `msg:"n" json:"n"`
-	A float64 `msg:"a" json:"a"`
-	B float64 `msg:"b" json:"b"`
-	C float64 `msg:"c" json:"c"`
-	I int16   `msg:"i" json:"i"`
-}
 
 // type SyncedMessage struct {
 // 	User   string `msg:"n" json:"user"`
