@@ -5411,6 +5411,12 @@ func (z *Offer) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "C")
 				return
 			}
+		case "s":
+			z.S, err = dc.ReadFloat64()
+			if err != nil {
+				err = msgp.WrapError(err, "S")
+				return
+			}
 		case "i":
 			z.I, err = dc.ReadInt16()
 			if err != nil {
@@ -5430,9 +5436,9 @@ func (z *Offer) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *Offer) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 5
+	// map header, size 6
 	// write "n"
-	err = en.Append(0x85, 0xa1, 0x6e)
+	err = en.Append(0x86, 0xa1, 0x6e)
 	if err != nil {
 		return
 	}
@@ -5471,6 +5477,16 @@ func (z *Offer) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "C")
 		return
 	}
+	// write "s"
+	err = en.Append(0xa1, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteFloat64(z.S)
+	if err != nil {
+		err = msgp.WrapError(err, "S")
+		return
+	}
 	// write "i"
 	err = en.Append(0xa1, 0x69)
 	if err != nil {
@@ -5487,9 +5503,9 @@ func (z *Offer) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *Offer) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 5
+	// map header, size 6
 	// string "n"
-	o = append(o, 0x85, 0xa1, 0x6e)
+	o = append(o, 0x86, 0xa1, 0x6e)
 	o = msgp.AppendString(o, z.N)
 	// string "a"
 	o = append(o, 0xa1, 0x61)
@@ -5500,6 +5516,9 @@ func (z *Offer) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "c"
 	o = append(o, 0xa1, 0x63)
 	o = msgp.AppendFloat64(o, z.C)
+	// string "s"
+	o = append(o, 0xa1, 0x73)
+	o = msgp.AppendFloat64(o, z.S)
 	// string "i"
 	o = append(o, 0xa1, 0x69)
 	o = msgp.AppendInt16(o, z.I)
@@ -5548,6 +5567,12 @@ func (z *Offer) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "C")
 				return
 			}
+		case "s":
+			z.S, bts, err = msgp.ReadFloat64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "S")
+				return
+			}
 		case "i":
 			z.I, bts, err = msgp.ReadInt16Bytes(bts)
 			if err != nil {
@@ -5568,7 +5593,7 @@ func (z *Offer) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *Offer) Msgsize() (s int) {
-	s = 1 + 2 + msgp.StringPrefixSize + len(z.N) + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Int16Size
+	s = 1 + 2 + msgp.StringPrefixSize + len(z.N) + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Int16Size
 	return
 }
 
