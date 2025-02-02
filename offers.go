@@ -40,7 +40,10 @@ var OfferMap = map[string]AB{
 	//1 X 2 (reg. time)
 	"time_win,tinnings,1,wdw": {Kind: NoBet},
 	//1X2 + Both Score
-	"mo_both_score": {Kind: NoBet},
+	"mo_both_score":               {Kind: NoBet},
+	"time_cs,tp,all":              {Kind: NoBet},
+	"time_win,tp,all,sub,180,wdw": {Kind: NoBet}, //darts wdw
+	"time_win,tperiod,1,wdw":      {Kind: NoBet}, // ih wdw
 
 	"wdw":          {Kind: WDW},
 	"dc":           {Kind: DoubleChance},
@@ -86,20 +89,21 @@ var OfferMap = map[string]AB{
 	"time_ah,tmap,5":     {B: "tmap,5,ah,h", A: "tmap,5,ah,a", Short: "hm5", Kind: Handicap},
 
 	// asian total and different periods (14)
-	"ahou":                 {B: "ahunder", A: "ahover", Short: "t", Kind: Handicap},
-	"time_ahou,tp,all":     {B: "tp,all,ahunder", A: "tp,all,ahover", Short: "to", Kind: Handicap},
-	"time_ahou,tp,reg":     {B: "tp,reg,ahunder", A: "tp,reg,ahover", Short: "tr", Kind: Handicap},
-	"time_ahou,thalf,1":    {B: "thalf,1,ahunder", A: "thalf,1,ahover", Short: "t1", Kind: Handicap},
-	"time_ahou,tquarter,1": {B: "tquarter,1,ahunder", A: "tquarter,1,ahover", Short: "tq1", Kind: Handicap},
-	"time_ahou,tperiod,1":  {B: "tp,1,ahunder", A: "tp,1,ahover", Short: "tp1", Kind: Handicap},
-	"time_ahou,tperiod,2":  {B: "tp,2,ahunder", A: "tp,2,ahover", Short: "tp2", Kind: Handicap},
-	"time_ahou,tperiod,3":  {B: "tp,3,ahunder", A: "tp,3,ahover", Short: "tp3", Kind: Handicap},
-	"time_ahou,tperiod,4":  {B: "tp,4,ahunder", A: "tp,4,ahover", Short: "tp4", Kind: Handicap},
-	"time_ahou,tmap,1":     {B: "tmap,1,ahunder", A: "tmap,1,ahover", Short: "tm1", Kind: Handicap},
-	"time_ahou,tmap,2":     {B: "tmap,2,ahunder", A: "tmap,2,ahover", Short: "tm2", Kind: Handicap},
-	"time_ahou,tmap,3":     {B: "tmap,3,ahunder", A: "tmap,3,ahover", Short: "tm3", Kind: Handicap},
-	"time_ahou,tmap,4":     {B: "tmap,4,ahunder", A: "tmap,4,ahover", Short: "tm4", Kind: Handicap},
-	"time_ahou,tmap,5":     {B: "tmap,5,ahunder", A: "tmap,5,ahover", Short: "tm5", Kind: Handicap},
+	"ahou":                     {B: "ahunder", A: "ahover", Short: "t", Kind: Handicap},
+	"time_ahou,tp,all":         {B: "tp,all,ahunder", A: "tp,all,ahover", Short: "to", Kind: Handicap},
+	"time_ahou,tp,all,sub,180": {B: "tp,all,sub,180,ahunder", A: "tp,all,sub,180,ahover", Short: "t180", Kind: Handicap},
+	"time_ahou,tp,reg":         {B: "tp,reg,ahunder", A: "tp,reg,ahover", Short: "tr", Kind: Handicap},
+	"time_ahou,thalf,1":        {B: "thalf,1,ahunder", A: "thalf,1,ahover", Short: "t1", Kind: Handicap},
+	"time_ahou,tquarter,1":     {B: "tquarter,1,ahunder", A: "tquarter,1,ahover", Short: "tq1", Kind: Handicap},
+	"time_ahou,tperiod,1":      {B: "tp,1,ahunder", A: "tp,1,ahover", Short: "tp1", Kind: Handicap},
+	"time_ahou,tperiod,2":      {B: "tp,2,ahunder", A: "tp,2,ahover", Short: "tp2", Kind: Handicap},
+	"time_ahou,tperiod,3":      {B: "tp,3,ahunder", A: "tp,3,ahover", Short: "tp3", Kind: Handicap},
+	"time_ahou,tperiod,4":      {B: "tp,4,ahunder", A: "tp,4,ahover", Short: "tp4", Kind: Handicap},
+	"time_ahou,tmap,1":         {B: "tmap,1,ahunder", A: "tmap,1,ahover", Short: "tm1", Kind: Handicap},
+	"time_ahou,tmap,2":         {B: "tmap,2,ahunder", A: "tmap,2,ahover", Short: "tm2", Kind: Handicap},
+	"time_ahou,tmap,3":         {B: "tmap,3,ahunder", A: "tmap,3,ahover", Short: "tm3", Kind: Handicap},
+	"time_ahou,tmap,4":         {B: "tmap,4,ahunder", A: "tmap,4,ahover", Short: "tm4", Kind: Handicap},
+	"time_ahou,tmap,5":         {B: "tmap,5,ahunder", A: "tmap,5,ahover", Short: "tm5", Kind: Handicap},
 
 	//	home total and different periods (14)
 	"tahou,h":                 {B: "tahunder,h", A: "tahover,h", Short: "th", Kind: Handicap},
