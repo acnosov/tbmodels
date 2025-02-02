@@ -38,6 +38,7 @@ const (
 	ResultsOrdersSubject = "results.orders"
 
 	TradebotSurebetSubject = "tradebot.surebet"
+	TradebotCheckSubject   = "tradebot.check"
 )
 
 // UserNatsSubject = "user"
