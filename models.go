@@ -311,3 +311,9 @@ type NotificationMessage struct {
 	Level   string `msg:"l" json:"level"`
 	TS      int64  `msg:"t" json:"ts,omitempty"`
 }
+type CheckMessage struct {
+	Name    string
+	Spread  float64
+	EventID int32
+	Index   int16
+}
