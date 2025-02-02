@@ -262,7 +262,6 @@ type BetMessage struct {
 	OrderID      int32         `msg:"o" json:"order_id"`
 }
 
-
 // type SyncedMessage struct {
 // 	User   string `msg:"n" json:"user"`
 // 	OpenTS int64  `msg:"o" json:"open_ts"`
@@ -312,8 +311,8 @@ type NotificationMessage struct {
 	TS      int64  `msg:"t" json:"ts,omitempty"`
 }
 type CheckMessage struct {
-	Name    string
-	Spread  float64
-	EventID int32
-	Index   int16
+	Name    string  `msg:"n" json:"name"`
+	Spread  float64 `msg:"s" json:"spread"`
+	EventID int32   `msg:"e" json:"event_id"`
+	Index   int16   `msg:"i" json:"index"`
 }
