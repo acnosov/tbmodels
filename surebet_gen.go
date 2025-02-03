@@ -42,6 +42,18 @@ func (z *Price) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "Price")
 				return
 			}
+		case "P":
+			z.BestPrice, err = dc.ReadFloat64()
+			if err != nil {
+				err = msgp.WrapError(err, "BestPrice")
+				return
+			}
+		case "l":
+			z.LowestPrice, err = dc.ReadFloat64()
+			if err != nil {
+				err = msgp.WrapError(err, "LowestPrice")
+				return
+			}
 		case "m":
 			z.Min, err = dc.ReadFloat64()
 			if err != nil {
@@ -79,9 +91,9 @@ func (z *Price) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *Price) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 7
+	// map header, size 9
 	// write "b"
-	err = en.Append(0x87, 0xa1, 0x62)
+	err = en.Append(0x89, 0xa1, 0x62)
 	if err != nil {
 		return
 	}
@@ -108,6 +120,26 @@ func (z *Price) EncodeMsg(en *msgp.Writer) (err error) {
 	err = en.WriteFloat64(z.Price)
 	if err != nil {
 		err = msgp.WrapError(err, "Price")
+		return
+	}
+	// write "P"
+	err = en.Append(0xa1, 0x50)
+	if err != nil {
+		return
+	}
+	err = en.WriteFloat64(z.BestPrice)
+	if err != nil {
+		err = msgp.WrapError(err, "BestPrice")
+		return
+	}
+	// write "l"
+	err = en.Append(0xa1, 0x6c)
+	if err != nil {
+		return
+	}
+	err = en.WriteFloat64(z.LowestPrice)
+	if err != nil {
+		err = msgp.WrapError(err, "LowestPrice")
 		return
 	}
 	// write "m"
@@ -156,9 +188,9 @@ func (z *Price) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *Price) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 7
+	// map header, size 9
 	// string "b"
-	o = append(o, 0x87, 0xa1, 0x62)
+	o = append(o, 0x89, 0xa1, 0x62)
 	o = msgp.AppendString(o, z.Bookie)
 	// string "e"
 	o = append(o, 0xa1, 0x65)
@@ -166,6 +198,12 @@ func (z *Price) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "p"
 	o = append(o, 0xa1, 0x70)
 	o = msgp.AppendFloat64(o, z.Price)
+	// string "P"
+	o = append(o, 0xa1, 0x50)
+	o = msgp.AppendFloat64(o, z.BestPrice)
+	// string "l"
+	o = append(o, 0xa1, 0x6c)
+	o = msgp.AppendFloat64(o, z.LowestPrice)
 	// string "m"
 	o = append(o, 0xa1, 0x6d)
 	o = msgp.AppendFloat64(o, z.Min)
@@ -217,6 +255,18 @@ func (z *Price) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "Price")
 				return
 			}
+		case "P":
+			z.BestPrice, bts, err = msgp.ReadFloat64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "BestPrice")
+				return
+			}
+		case "l":
+			z.LowestPrice, bts, err = msgp.ReadFloat64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "LowestPrice")
+				return
+			}
 		case "m":
 			z.Min, bts, err = msgp.ReadFloat64Bytes(bts)
 			if err != nil {
@@ -255,7 +305,7 @@ func (z *Price) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *Price) Msgsize() (s int) {
-	s = 1 + 2 + msgp.StringPrefixSize + len(z.Bookie) + 2 + msgp.StringPrefixSize + len(z.BetType) + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Int64Size + 2 + msgp.Int64Size
+	s = 1 + 2 + msgp.StringPrefixSize + len(z.Bookie) + 2 + msgp.StringPrefixSize + len(z.BetType) + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Int64Size + 2 + msgp.Int64Size
 	return
 }
 
