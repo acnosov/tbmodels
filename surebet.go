@@ -83,12 +83,14 @@ type Side struct {
 	IsComplete       bool      `msg:"g"`
 }
 type Price struct {
-	Bookie string  `msg:"b" json:"bookie,omitempty"`
-	Price  float64 `msg:"p" json:"price,omitempty"`
-	Min    float64 `msg:"m" json:"min,omitempty"`
-	Max    float64 `msg:"M" json:"max,omitempty"`
-	TS     int64   `msg:"t" json:"ts"`
-	IsBest bool    `msg:"-" json:"-"`
+	Bookie  string  `msg:"b" json:"bookie,omitempty"`
+	BetType string  `msg:"e" json:"bet_type,omitempty"`
+	Price   float64 `msg:"p" json:"price,omitempty"`
+	Min     float64 `msg:"m" json:"min,omitempty"`
+	Max     float64 `msg:"M" json:"max,omitempty"`
+	TS      int64   `msg:"t" json:"ts"`
+	AgeMS   int64   `msg:"a" json:"age_ms,omitempty"`
+	IsBest  bool    `msg:"-" json:"-"`
 }
 type Timing struct {
 	WsReceive          int64 `msg:"r" json:"ws_receive,omitempty"`
