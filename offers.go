@@ -37,6 +37,7 @@ var OfferMap = map[string]AB{
 	"tennis_cs,all,set": {Kind: NoBet},
 	//1 X 2 (reg. time)
 	"time_win,tp,reg,wdw": {Kind: NoBet},
+	"time_win,tp,all,wdw": {Kind: NoBet},
 	//1 X 2 (reg. time)
 	"time_win,tinnings,1,wdw": {Kind: NoBet},
 	//1X2 + Both Score
