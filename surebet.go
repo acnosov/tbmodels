@@ -93,6 +93,7 @@ type Price struct {
 	TS          int64   `msg:"t" json:"ts"`
 	AgeMS       int64   `msg:"a" json:"age_ms"`
 	IsBest      bool    `msg:"-" json:"-"`
+	FailProb    float64 `msg:"f" json:"fail_prob"`
 }
 type Timing struct {
 	WsReceive          int64 `msg:"r" json:"ws_receive,omitempty"`
