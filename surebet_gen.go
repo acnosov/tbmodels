@@ -78,6 +78,12 @@ func (z *Price) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "AgeMS")
 				return
 			}
+		case "f":
+			z.FailProb, err = dc.ReadFloat64()
+			if err != nil {
+				err = msgp.WrapError(err, "FailProb")
+				return
+			}
 		default:
 			err = dc.Skip()
 			if err != nil {
@@ -91,9 +97,9 @@ func (z *Price) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *Price) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 9
+	// map header, size 10
 	// write "b"
-	err = en.Append(0x89, 0xa1, 0x62)
+	err = en.Append(0x8a, 0xa1, 0x62)
 	if err != nil {
 		return
 	}
@@ -182,15 +188,25 @@ func (z *Price) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "AgeMS")
 		return
 	}
+	// write "f"
+	err = en.Append(0xa1, 0x66)
+	if err != nil {
+		return
+	}
+	err = en.WriteFloat64(z.FailProb)
+	if err != nil {
+		err = msgp.WrapError(err, "FailProb")
+		return
+	}
 	return
 }
 
 // MarshalMsg implements msgp.Marshaler
 func (z *Price) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 9
+	// map header, size 10
 	// string "b"
-	o = append(o, 0x89, 0xa1, 0x62)
+	o = append(o, 0x8a, 0xa1, 0x62)
 	o = msgp.AppendString(o, z.Bookie)
 	// string "e"
 	o = append(o, 0xa1, 0x65)
@@ -216,6 +232,9 @@ func (z *Price) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "a"
 	o = append(o, 0xa1, 0x61)
 	o = msgp.AppendInt64(o, z.AgeMS)
+	// string "f"
+	o = append(o, 0xa1, 0x66)
+	o = msgp.AppendFloat64(o, z.FailProb)
 	return
 }
 
@@ -291,6 +310,12 @@ func (z *Price) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "AgeMS")
 				return
 			}
+		case "f":
+			z.FailProb, bts, err = msgp.ReadFloat64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "FailProb")
+				return
+			}
 		default:
 			bts, err = msgp.Skip(bts)
 			if err != nil {
@@ -305,7 +330,7 @@ func (z *Price) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *Price) Msgsize() (s int) {
-	s = 1 + 2 + msgp.StringPrefixSize + len(z.Bookie) + 2 + msgp.StringPrefixSize + len(z.BetType) + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Int64Size + 2 + msgp.Int64Size
+	s = 1 + 2 + msgp.StringPrefixSize + len(z.Bookie) + 2 + msgp.StringPrefixSize + len(z.BetType) + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Int64Size + 2 + msgp.Int64Size + 2 + msgp.Float64Size
 	return
 }
 
