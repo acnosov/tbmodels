@@ -1055,6 +1055,18 @@ func (z *BetConfig) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "Priority")
 				return
 			}
+		case "a":
+			z.MaxAge, err = dc.ReadInt64()
+			if err != nil {
+				err = msgp.WrapError(err, "MaxAge")
+				return
+			}
+		case "f":
+			z.FailProb, err = dc.ReadFloat64()
+			if err != nil {
+				err = msgp.WrapError(err, "FailProb")
+				return
+			}
 		default:
 			err = dc.Skip()
 			if err != nil {
@@ -1067,10 +1079,10 @@ func (z *BetConfig) DecodeMsg(dc *msgp.Reader) (err error) {
 }
 
 // EncodeMsg implements msgp.Encodable
-func (z BetConfig) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 2
+func (z *BetConfig) EncodeMsg(en *msgp.Writer) (err error) {
+	// map header, size 4
 	// write "b"
-	err = en.Append(0x82, 0xa1, 0x62)
+	err = en.Append(0x84, 0xa1, 0x62)
 	if err != nil {
 		return
 	}
@@ -1089,19 +1101,45 @@ func (z BetConfig) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Priority")
 		return
 	}
+	// write "a"
+	err = en.Append(0xa1, 0x61)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt64(z.MaxAge)
+	if err != nil {
+		err = msgp.WrapError(err, "MaxAge")
+		return
+	}
+	// write "f"
+	err = en.Append(0xa1, 0x66)
+	if err != nil {
+		return
+	}
+	err = en.WriteFloat64(z.FailProb)
+	if err != nil {
+		err = msgp.WrapError(err, "FailProb")
+		return
+	}
 	return
 }
 
 // MarshalMsg implements msgp.Marshaler
-func (z BetConfig) MarshalMsg(b []byte) (o []byte, err error) {
+func (z *BetConfig) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 2
+	// map header, size 4
 	// string "b"
-	o = append(o, 0x82, 0xa1, 0x62)
+	o = append(o, 0x84, 0xa1, 0x62)
 	o = msgp.AppendString(o, z.Bookie)
 	// string "p"
 	o = append(o, 0xa1, 0x70)
 	o = msgp.AppendInt16(o, z.Priority)
+	// string "a"
+	o = append(o, 0xa1, 0x61)
+	o = msgp.AppendInt64(o, z.MaxAge)
+	// string "f"
+	o = append(o, 0xa1, 0x66)
+	o = msgp.AppendFloat64(o, z.FailProb)
 	return
 }
 
@@ -1135,6 +1173,18 @@ func (z *BetConfig) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "Priority")
 				return
 			}
+		case "a":
+			z.MaxAge, bts, err = msgp.ReadInt64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "MaxAge")
+				return
+			}
+		case "f":
+			z.FailProb, bts, err = msgp.ReadFloat64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "FailProb")
+				return
+			}
 		default:
 			bts, err = msgp.Skip(bts)
 			if err != nil {
@@ -1148,8 +1198,8 @@ func (z *BetConfig) UnmarshalMsg(bts []byte) (o []byte, err error) {
 }
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
-func (z BetConfig) Msgsize() (s int) {
-	s = 1 + 2 + msgp.StringPrefixSize + len(z.Bookie) + 2 + msgp.Int16Size
+func (z *BetConfig) Msgsize() (s int) {
+	s = 1 + 2 + msgp.StringPrefixSize + len(z.Bookie) + 2 + msgp.Int16Size + 2 + msgp.Int64Size + 2 + msgp.Float64Size
 	return
 }
 
