@@ -275,8 +275,10 @@ type BalanceDB struct {
 	UserID    uint8   `msg:"i" json:"user_id"`
 }
 type BetConfig struct {
-	Bookie   string `msg:"b" json:"bookie"`
-	Priority int16  `msg:"p" json:"priority"`
+	Bookie   string  `msg:"b" json:"bookie"`
+	Priority int16   `msg:"p" json:"priority"`
+	MaxAge   int64   `msg:"a" json:"max_age"`
+	FailProb float64 `msg:"f" json:"fail_prob"`
 }
 type StatsMessage struct {
 	Data    []byte `msg:"d" json:"data"`
