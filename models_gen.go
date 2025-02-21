@@ -1067,6 +1067,12 @@ func (z *BetConfig) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "FailProb")
 				return
 			}
+		case "x":
+			z.Exchange, err = dc.ReadBool()
+			if err != nil {
+				err = msgp.WrapError(err, "Exchange")
+				return
+			}
 		default:
 			err = dc.Skip()
 			if err != nil {
@@ -1080,9 +1086,9 @@ func (z *BetConfig) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *BetConfig) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 4
+	// map header, size 5
 	// write "b"
-	err = en.Append(0x84, 0xa1, 0x62)
+	err = en.Append(0x85, 0xa1, 0x62)
 	if err != nil {
 		return
 	}
@@ -1121,15 +1127,25 @@ func (z *BetConfig) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "FailProb")
 		return
 	}
+	// write "x"
+	err = en.Append(0xa1, 0x78)
+	if err != nil {
+		return
+	}
+	err = en.WriteBool(z.Exchange)
+	if err != nil {
+		err = msgp.WrapError(err, "Exchange")
+		return
+	}
 	return
 }
 
 // MarshalMsg implements msgp.Marshaler
 func (z *BetConfig) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 4
+	// map header, size 5
 	// string "b"
-	o = append(o, 0x84, 0xa1, 0x62)
+	o = append(o, 0x85, 0xa1, 0x62)
 	o = msgp.AppendString(o, z.Bookie)
 	// string "p"
 	o = append(o, 0xa1, 0x70)
@@ -1140,6 +1156,9 @@ func (z *BetConfig) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "f"
 	o = append(o, 0xa1, 0x66)
 	o = msgp.AppendFloat64(o, z.FailProb)
+	// string "x"
+	o = append(o, 0xa1, 0x78)
+	o = msgp.AppendBool(o, z.Exchange)
 	return
 }
 
@@ -1185,6 +1204,12 @@ func (z *BetConfig) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "FailProb")
 				return
 			}
+		case "x":
+			z.Exchange, bts, err = msgp.ReadBoolBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Exchange")
+				return
+			}
 		default:
 			bts, err = msgp.Skip(bts)
 			if err != nil {
@@ -1199,7 +1224,7 @@ func (z *BetConfig) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *BetConfig) Msgsize() (s int) {
-	s = 1 + 2 + msgp.StringPrefixSize + len(z.Bookie) + 2 + msgp.Int16Size + 2 + msgp.Int64Size + 2 + msgp.Float64Size
+	s = 1 + 2 + msgp.StringPrefixSize + len(z.Bookie) + 2 + msgp.Int16Size + 2 + msgp.Int64Size + 2 + msgp.Float64Size + 2 + msgp.BoolSize
 	return
 }
 
