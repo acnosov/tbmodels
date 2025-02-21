@@ -280,6 +280,7 @@ type BetConfig struct {
 	MaxAge   int64   `msg:"a" json:"max_age"`
 	FailProb float64 `msg:"f" json:"fail_prob"`
 	Exchange bool    `msg:"x" json:"exchange"`
+	ROI      float64 `msg:"r" json:"roi"`
 }
 type StatsMessage struct {
 	Data    []byte `msg:"d" json:"data"`

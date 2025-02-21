@@ -1073,6 +1073,12 @@ func (z *BetConfig) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "Exchange")
 				return
 			}
+		case "r":
+			z.ROI, err = dc.ReadFloat64()
+			if err != nil {
+				err = msgp.WrapError(err, "ROI")
+				return
+			}
 		default:
 			err = dc.Skip()
 			if err != nil {
@@ -1086,9 +1092,9 @@ func (z *BetConfig) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *BetConfig) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 5
+	// map header, size 6
 	// write "b"
-	err = en.Append(0x85, 0xa1, 0x62)
+	err = en.Append(0x86, 0xa1, 0x62)
 	if err != nil {
 		return
 	}
@@ -1137,15 +1143,25 @@ func (z *BetConfig) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Exchange")
 		return
 	}
+	// write "r"
+	err = en.Append(0xa1, 0x72)
+	if err != nil {
+		return
+	}
+	err = en.WriteFloat64(z.ROI)
+	if err != nil {
+		err = msgp.WrapError(err, "ROI")
+		return
+	}
 	return
 }
 
 // MarshalMsg implements msgp.Marshaler
 func (z *BetConfig) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 5
+	// map header, size 6
 	// string "b"
-	o = append(o, 0x85, 0xa1, 0x62)
+	o = append(o, 0x86, 0xa1, 0x62)
 	o = msgp.AppendString(o, z.Bookie)
 	// string "p"
 	o = append(o, 0xa1, 0x70)
@@ -1159,6 +1175,9 @@ func (z *BetConfig) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "x"
 	o = append(o, 0xa1, 0x78)
 	o = msgp.AppendBool(o, z.Exchange)
+	// string "r"
+	o = append(o, 0xa1, 0x72)
+	o = msgp.AppendFloat64(o, z.ROI)
 	return
 }
 
@@ -1210,6 +1229,12 @@ func (z *BetConfig) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "Exchange")
 				return
 			}
+		case "r":
+			z.ROI, bts, err = msgp.ReadFloat64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ROI")
+				return
+			}
 		default:
 			bts, err = msgp.Skip(bts)
 			if err != nil {
@@ -1224,7 +1249,7 @@ func (z *BetConfig) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *BetConfig) Msgsize() (s int) {
-	s = 1 + 2 + msgp.StringPrefixSize + len(z.Bookie) + 2 + msgp.Int16Size + 2 + msgp.Int64Size + 2 + msgp.Float64Size + 2 + msgp.BoolSize
+	s = 1 + 2 + msgp.StringPrefixSize + len(z.Bookie) + 2 + msgp.Int16Size + 2 + msgp.Int64Size + 2 + msgp.Float64Size + 2 + msgp.BoolSize + 2 + msgp.Float64Size
 	return
 }
 
