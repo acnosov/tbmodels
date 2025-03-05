@@ -1598,6 +1598,12 @@ func (z *SurebetDB) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "EventSport")
 				return
 			}
+		case "EventString":
+			z.EventString, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "EventString")
+				return
+			}
 		case "Members":
 			var zb0002 uint32
 			zb0002, err = dc.ReadArrayHeader()
@@ -1761,9 +1767,9 @@ func (z *SurebetDB) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *SurebetDB) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 27
+	// map header, size 28
 	// write "EventStarts"
-	err = en.Append(0xde, 0x0, 0x1b, 0xab, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x61, 0x72, 0x74, 0x73)
+	err = en.Append(0xde, 0x0, 0x1c, 0xab, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x61, 0x72, 0x74, 0x73)
 	if err != nil {
 		return
 	}
@@ -1800,6 +1806,16 @@ func (z *SurebetDB) EncodeMsg(en *msgp.Writer) (err error) {
 	err = en.WriteString(z.EventSport)
 	if err != nil {
 		err = msgp.WrapError(err, "EventSport")
+		return
+	}
+	// write "EventString"
+	err = en.Append(0xab, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.EventString)
+	if err != nil {
+		err = msgp.WrapError(err, "EventString")
 		return
 	}
 	// write "Members"
@@ -2045,9 +2061,9 @@ func (z *SurebetDB) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *SurebetDB) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 27
+	// map header, size 28
 	// string "EventStarts"
-	o = append(o, 0xde, 0x0, 0x1b, 0xab, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x61, 0x72, 0x74, 0x73)
+	o = append(o, 0xde, 0x0, 0x1c, 0xab, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x61, 0x72, 0x74, 0x73)
 	o = msgp.AppendTime(o, z.EventStarts)
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
@@ -2058,6 +2074,9 @@ func (z *SurebetDB) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "EventSport"
 	o = append(o, 0xaa, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53, 0x70, 0x6f, 0x72, 0x74)
 	o = msgp.AppendString(o, z.EventSport)
+	// string "EventString"
+	o = append(o, 0xab, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67)
+	o = msgp.AppendString(o, z.EventString)
 	// string "Members"
 	o = append(o, 0xa7, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(2))
@@ -2181,6 +2200,12 @@ func (z *SurebetDB) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			z.EventSport, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "EventSport")
+				return
+			}
+		case "EventString":
+			z.EventString, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "EventString")
 				return
 			}
 		case "Members":
@@ -2347,7 +2372,7 @@ func (z *SurebetDB) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *SurebetDB) Msgsize() (s int) {
-	s = 3 + 12 + msgp.TimeSize + 4 + msgp.StringPrefixSize + len(z.Key) + 16 + msgp.StringPrefixSize + len(z.CalcFirstReason) + 11 + msgp.StringPrefixSize + len(z.EventSport) + 8 + msgp.ArrayHeaderSize
+	s = 3 + 12 + msgp.TimeSize + 4 + msgp.StringPrefixSize + len(z.Key) + 16 + msgp.StringPrefixSize + len(z.CalcFirstReason) + 11 + msgp.StringPrefixSize + len(z.EventSport) + 12 + msgp.StringPrefixSize + len(z.EventString) + 8 + msgp.ArrayHeaderSize
 	for za0001 := range z.Members {
 		s += z.Members[za0001].Msgsize()
 	}

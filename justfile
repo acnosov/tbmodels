@@ -7,3 +7,6 @@ gen:
 
 fieldalignment:
     fieldalignment ./...
+
+install:
+    go install github.com/tinylib/msgp@latest

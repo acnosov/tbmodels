@@ -11,6 +11,7 @@ type SurebetDB struct {
 	Key                   string
 	CalcFirstReason       string
 	EventSport            string
+	EventString           string
 	Members               [2]Side
 	Timing                Timing
 	CalcLastDataTs        int64
