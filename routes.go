@@ -20,9 +20,6 @@ const (
 	ServicePingSubject         = "service.ping"
 	ServicePongSubject         = "service.pong"
 	ServiceNotificationSubject = "service.notification"
-	// ServiceUpSubject           = "service.up"
-	// ServiceDownSubject         = "service.down"
-	// ServiceInitializedSubject  = "service.initialized"
 
 	StoreWatchSubject     = "store.watch."
 	StoreUnwatchSubject   = "store.unwatch."
@@ -41,11 +38,3 @@ const (
 	TradebotCheckSubject   = "tradebot.check"
 	HealBetslipSubject     = "heal.betslip"
 )
-
-// UserNatsSubject = "user"
-// ServiceSettingsSubject = "service.settings"
-// ServiceDisconnectedSubject = "service.disconnected"
-// UnsubscribeEventMessageType    = "unsubscribe_event"
-// SubscribeEventMessageType      = "subscribe_event"
-// UnsubscribeAllEventMessageType = "unsubscribe_all_event"
-// WebsocketConfigSubject       = "websocket.config"
