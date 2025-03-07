@@ -314,6 +314,12 @@ type NotificationMessage struct {
 	Level   string `msg:"l" json:"level"`
 	TS      int64  `msg:"t" json:"ts,omitempty"`
 }
+type CheckMessage struct {
+	Name    string  `msg:"n" json:"name"`
+	Spread  float64 `msg:"s" json:"spread"`
+	EventID int32   `msg:"e" json:"event_id"`
+	Index   int16   `msg:"i" json:"index"`
+}
 type UniversalMessage struct {
 	ID     int16  `msg:"i" json:"id"`
 	Status string `msg:"s" json:"status"`
