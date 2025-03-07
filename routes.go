@@ -39,6 +39,7 @@ const (
 
 	TradebotSurebetSubject = "tradebot.surebet"
 	TradebotCheckSubject   = "tradebot.check"
+	HealBetslipSubject     = "heal.betslip"
 )
 
 // UserNatsSubject = "user"
