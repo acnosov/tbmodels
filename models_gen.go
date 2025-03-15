@@ -8837,6 +8837,109 @@ func (z *Status) Msgsize() (s int) {
 }
 
 // DecodeMsg implements msgp.Decodable
+func (z *SubscriptionStateMessage) DecodeMsg(dc *msgp.Reader) (err error) {
+	var field []byte
+	_ = field
+	var zb0001 uint32
+	zb0001, err = dc.ReadMapHeader()
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	for zb0001 > 0 {
+		zb0001--
+		field, err = dc.ReadMapKeyPtr()
+		if err != nil {
+			err = msgp.WrapError(err)
+			return
+		}
+		switch msgp.UnsafeString(field) {
+		case "c":
+			z.Count, err = dc.ReadInt16()
+			if err != nil {
+				err = msgp.WrapError(err, "Count")
+				return
+			}
+		default:
+			err = dc.Skip()
+			if err != nil {
+				err = msgp.WrapError(err)
+				return
+			}
+		}
+	}
+	return
+}
+
+// EncodeMsg implements msgp.Encodable
+func (z SubscriptionStateMessage) EncodeMsg(en *msgp.Writer) (err error) {
+	// map header, size 1
+	// write "c"
+	err = en.Append(0x81, 0xa1, 0x63)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt16(z.Count)
+	if err != nil {
+		err = msgp.WrapError(err, "Count")
+		return
+	}
+	return
+}
+
+// MarshalMsg implements msgp.Marshaler
+func (z SubscriptionStateMessage) MarshalMsg(b []byte) (o []byte, err error) {
+	o = msgp.Require(b, z.Msgsize())
+	// map header, size 1
+	// string "c"
+	o = append(o, 0x81, 0xa1, 0x63)
+	o = msgp.AppendInt16(o, z.Count)
+	return
+}
+
+// UnmarshalMsg implements msgp.Unmarshaler
+func (z *SubscriptionStateMessage) UnmarshalMsg(bts []byte) (o []byte, err error) {
+	var field []byte
+	_ = field
+	var zb0001 uint32
+	zb0001, bts, err = msgp.ReadMapHeaderBytes(bts)
+	if err != nil {
+		err = msgp.WrapError(err)
+		return
+	}
+	for zb0001 > 0 {
+		zb0001--
+		field, bts, err = msgp.ReadMapKeyZC(bts)
+		if err != nil {
+			err = msgp.WrapError(err)
+			return
+		}
+		switch msgp.UnsafeString(field) {
+		case "c":
+			z.Count, bts, err = msgp.ReadInt16Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Count")
+				return
+			}
+		default:
+			bts, err = msgp.Skip(bts)
+			if err != nil {
+				err = msgp.WrapError(err)
+				return
+			}
+		}
+	}
+	o = bts
+	return
+}
+
+// Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
+func (z SubscriptionStateMessage) Msgsize() (s int) {
+	s = 1 + 2 + msgp.Int16Size
+	return
+}
+
+// DecodeMsg implements msgp.Decodable
 func (z *SyncMessage) DecodeMsg(dc *msgp.Reader) (err error) {
 	var field []byte
 	_ = field

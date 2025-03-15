@@ -324,3 +324,6 @@ type UniversalMessage struct {
 	ID     int16  `msg:"i" json:"id"`
 	Status string `msg:"s" json:"status"`
 }
+type SubscriptionStateMessage struct {
+	Count int16 `msg:"c" json:"id"`
+}
