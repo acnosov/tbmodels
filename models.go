@@ -277,13 +277,13 @@ type BalanceDB struct {
 
 type BetConfig struct {
 	Bookie        string             `msg:"b" json:"bookie"`
-	BetFail       float64            `msg:"f" json:"bet_fail"`
-	AvgFail       float64            `msg:"a" json:"avg_fail"`
 	BetSportFail  map[string]float64 `msg:"c" json:"bet_sport_fail"`
 	SideSportFail map[string]float64 `msg:"s" json:"side_sport_fail"`
+	BetFail       float64            `msg:"f" json:"bet_fail"`
+	AvgFail       float64            `msg:"a" json:"avg_fail"`
 	ROI           float64            `msg:"r" json:"roi"`
-	Exchange      bool               `msg:"x" json:"exchange"`
 	MaxAge        int16              `msg:"m" json:"max_age"`
+	Exchange      bool               `msg:"x" json:"exchange"`
 	Locked        bool               `msg:"l" json:"locked"`
 }
 type StatsMessage struct {
