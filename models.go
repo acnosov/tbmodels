@@ -274,13 +274,24 @@ type BalanceDB struct {
 	TS        int64   `msg:"u" json:"ts"`
 	UserID    uint8   `msg:"i" json:"user_id"`
 }
+
+//	type BetConfig struct {
+//		Bookie   string  `msg:"b" json:"bookie"`
+//		Priority int16   `msg:"p" json:"priority"`
+//		MaxAge   int64   `msg:"a" json:"max_age"`
+//		FailProb float64 `msg:"f" json:"fail_prob"`
+//		Exchange bool    `msg:"x" json:"exchange"`
+//		ROI      float64 `msg:"r" json:"roi"`
+//	}
 type BetConfig struct {
-	Bookie   string  `msg:"b" json:"bookie"`
-	Priority int16   `msg:"p" json:"priority"`
-	MaxAge   int64   `msg:"a" json:"max_age"`
-	FailProb float64 `msg:"f" json:"fail_prob"`
-	Exchange bool    `msg:"x" json:"exchange"`
-	ROI      float64 `msg:"r" json:"roi"`
+	Bookie    string             `msg:"b" json:"bookie"`
+	FailProb  float64            `msg:"f" json:"fail_prob"`
+	AvgFail   float64            `msg:"a" json:"avg_fail"`
+	SportFail map[string]float64 `msg:"s" json:"sport_fail"`
+	ROI       float64            `msg:"r" json:"roi"`
+	Exchange  bool               `msg:"x" json:"exchange"`
+	MaxAge    int16              `msg:"m" json:"max_age"`
+	Locked    bool               `msg:"l" json:"locked"`
 }
 type StatsMessage struct {
 	Data    []byte `msg:"d" json:"data"`
