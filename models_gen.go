@@ -1050,9 +1050,9 @@ func (z *BetConfig) DecodeMsg(dc *msgp.Reader) (err error) {
 				return
 			}
 		case "f":
-			z.FailProb, err = dc.ReadFloat64()
+			z.BetFail, err = dc.ReadFloat64()
 			if err != nil {
-				err = msgp.WrapError(err, "FailProb")
+				err = msgp.WrapError(err, "BetFail")
 				return
 			}
 		case "a":
@@ -1144,9 +1144,9 @@ func (z *BetConfig) EncodeMsg(en *msgp.Writer) (err error) {
 	if err != nil {
 		return
 	}
-	err = en.WriteFloat64(z.FailProb)
+	err = en.WriteFloat64(z.BetFail)
 	if err != nil {
-		err = msgp.WrapError(err, "FailProb")
+		err = msgp.WrapError(err, "BetFail")
 		return
 	}
 	// write "a"
@@ -1233,7 +1233,7 @@ func (z *BetConfig) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.AppendString(o, z.Bookie)
 	// string "f"
 	o = append(o, 0xa1, 0x66)
-	o = msgp.AppendFloat64(o, z.FailProb)
+	o = msgp.AppendFloat64(o, z.BetFail)
 	// string "a"
 	o = append(o, 0xa1, 0x61)
 	o = msgp.AppendFloat64(o, z.AvgFail)
@@ -1284,9 +1284,9 @@ func (z *BetConfig) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				return
 			}
 		case "f":
-			z.FailProb, bts, err = msgp.ReadFloat64Bytes(bts)
+			z.BetFail, bts, err = msgp.ReadFloat64Bytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "FailProb")
+				err = msgp.WrapError(err, "BetFail")
 				return
 			}
 		case "a":

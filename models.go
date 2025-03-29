@@ -285,7 +285,7 @@ type BalanceDB struct {
 //	}
 type BetConfig struct {
 	Bookie    string             `msg:"b" json:"bookie"`
-	FailProb  float64            `msg:"f" json:"fail_prob"`
+	BetFail   float64            `msg:"f" json:"bet_fail"`
 	AvgFail   float64            `msg:"a" json:"avg_fail"`
 	SportFail map[string]float64 `msg:"s" json:"sport_fail"`
 	ROI       float64            `msg:"r" json:"roi"`
