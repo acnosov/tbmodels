@@ -40,11 +40,14 @@ var OfferMap = map[string]AB{
 	"time_win,tp,all,wdw": {Kind: NoBet},
 	//1 X 2 (reg. time)
 	"time_win,tinnings,1,wdw": {Kind: NoBet},
+	"time_ah,tinnings,1":      {Kind: NoBet}, //todo: check if avail in web version
+	"time_ahou,tinnings,1":    {Kind: NoBet}, //todo: check if avail in web version
 	//1X2 + Both Score
 	"mo_both_score":               {Kind: NoBet},
 	"time_cs,tp,all":              {Kind: NoBet},
 	"time_win,tp,all,sub,180,wdw": {Kind: NoBet}, //darts wdw
 	"time_win,tperiod,1,wdw":      {Kind: NoBet}, // ih wdw
+	"time_win,thalf,1,wdw":        {Kind: NoBet}, // baseball wdw
 
 	"wdw":          {Kind: WDW},
 	"dc":           {Kind: DoubleChance},
@@ -88,7 +91,9 @@ var OfferMap = map[string]AB{
 	"time_ah,tmap,3":     {B: "tmap,3,ah,h", A: "tmap,3,ah,a", Short: "hm3", Kind: Handicap},
 	"time_ah,tmap,4":     {B: "tmap,4,ah,h", A: "tmap,4,ah,a", Short: "hm4", Kind: Handicap},
 	"time_ah,tmap,5":     {B: "tmap,5,ah,h", A: "tmap,5,ah,a", Short: "hm5", Kind: Handicap},
-
+	// "time_ah,tinnings,1": {B: "tmap,5,ah,h", A: "tmap,5,ah,a", Short: "hm5", Kind: Handicap},
+	// for,thalf,1,ah,h,-2
+	//
 	// asian total and different periods (14)
 	"ahou":                     {B: "ahunder", A: "ahover", Short: "t", Kind: Handicap},
 	"time_ahou,tp,all":         {B: "tp,all,ahunder", A: "tp,all,ahover", Short: "to", Kind: Handicap},
@@ -105,6 +110,7 @@ var OfferMap = map[string]AB{
 	"time_ahou,tmap,3":         {B: "tmap,3,ahunder", A: "tmap,3,ahover", Short: "tm3", Kind: Handicap},
 	"time_ahou,tmap,4":         {B: "tmap,4,ahunder", A: "tmap,4,ahover", Short: "tm4", Kind: Handicap},
 	"time_ahou,tmap,5":         {B: "tmap,5,ahunder", A: "tmap,5,ahover", Short: "tm5", Kind: Handicap},
+	// "time_ahou,tinnings,1":     {B: "tmap,5,ahunder", A: "tmap,5,ahover", Short: "tm5", Kind: Handicap},
 
 	//	home total and different periods (14)
 	"tahou,h":                 {B: "tahunder,h", A: "tahover,h", Short: "th", Kind: Handicap},
