@@ -8750,12 +8750,6 @@ func (z *StatsMessage) DecodeMsg(dc *msgp.Reader) (err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "d":
-			z.Data, err = dc.ReadBytes(z.Data)
-			if err != nil {
-				err = msgp.WrapError(err, "Data")
-				return
-			}
 		case "t":
 			z.TS, err = dc.ReadInt64()
 			if err != nil {
@@ -8766,6 +8760,24 @@ func (z *StatsMessage) DecodeMsg(dc *msgp.Reader) (err error) {
 			z.EventID, err = dc.ReadInt32()
 			if err != nil {
 				err = msgp.WrapError(err, "EventID")
+				return
+			}
+		case "c":
+			z.CountEvent, err = dc.ReadInt16()
+			if err != nil {
+				err = msgp.WrapError(err, "CountEvent")
+				return
+			}
+		case "a":
+			z.AmountEvent, err = dc.ReadInt16()
+			if err != nil {
+				err = msgp.WrapError(err, "AmountEvent")
+				return
+			}
+		case "o":
+			z.OpenEvent, err = dc.ReadInt16()
+			if err != nil {
+				err = msgp.WrapError(err, "OpenEvent")
 				return
 			}
 		default:
@@ -8781,19 +8793,9 @@ func (z *StatsMessage) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *StatsMessage) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 3
-	// write "d"
-	err = en.Append(0x83, 0xa1, 0x64)
-	if err != nil {
-		return
-	}
-	err = en.WriteBytes(z.Data)
-	if err != nil {
-		err = msgp.WrapError(err, "Data")
-		return
-	}
+	// map header, size 5
 	// write "t"
-	err = en.Append(0xa1, 0x74)
+	err = en.Append(0x85, 0xa1, 0x74)
 	if err != nil {
 		return
 	}
@@ -8812,22 +8814,58 @@ func (z *StatsMessage) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "EventID")
 		return
 	}
+	// write "c"
+	err = en.Append(0xa1, 0x63)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt16(z.CountEvent)
+	if err != nil {
+		err = msgp.WrapError(err, "CountEvent")
+		return
+	}
+	// write "a"
+	err = en.Append(0xa1, 0x61)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt16(z.AmountEvent)
+	if err != nil {
+		err = msgp.WrapError(err, "AmountEvent")
+		return
+	}
+	// write "o"
+	err = en.Append(0xa1, 0x6f)
+	if err != nil {
+		return
+	}
+	err = en.WriteInt16(z.OpenEvent)
+	if err != nil {
+		err = msgp.WrapError(err, "OpenEvent")
+		return
+	}
 	return
 }
 
 // MarshalMsg implements msgp.Marshaler
 func (z *StatsMessage) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 3
-	// string "d"
-	o = append(o, 0x83, 0xa1, 0x64)
-	o = msgp.AppendBytes(o, z.Data)
+	// map header, size 5
 	// string "t"
-	o = append(o, 0xa1, 0x74)
+	o = append(o, 0x85, 0xa1, 0x74)
 	o = msgp.AppendInt64(o, z.TS)
 	// string "e"
 	o = append(o, 0xa1, 0x65)
 	o = msgp.AppendInt32(o, z.EventID)
+	// string "c"
+	o = append(o, 0xa1, 0x63)
+	o = msgp.AppendInt16(o, z.CountEvent)
+	// string "a"
+	o = append(o, 0xa1, 0x61)
+	o = msgp.AppendInt16(o, z.AmountEvent)
+	// string "o"
+	o = append(o, 0xa1, 0x6f)
+	o = msgp.AppendInt16(o, z.OpenEvent)
 	return
 }
 
@@ -8849,12 +8887,6 @@ func (z *StatsMessage) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			return
 		}
 		switch msgp.UnsafeString(field) {
-		case "d":
-			z.Data, bts, err = msgp.ReadBytesBytes(bts, z.Data)
-			if err != nil {
-				err = msgp.WrapError(err, "Data")
-				return
-			}
 		case "t":
 			z.TS, bts, err = msgp.ReadInt64Bytes(bts)
 			if err != nil {
@@ -8865,6 +8897,24 @@ func (z *StatsMessage) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			z.EventID, bts, err = msgp.ReadInt32Bytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "EventID")
+				return
+			}
+		case "c":
+			z.CountEvent, bts, err = msgp.ReadInt16Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "CountEvent")
+				return
+			}
+		case "a":
+			z.AmountEvent, bts, err = msgp.ReadInt16Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "AmountEvent")
+				return
+			}
+		case "o":
+			z.OpenEvent, bts, err = msgp.ReadInt16Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "OpenEvent")
 				return
 			}
 		default:
@@ -8881,7 +8931,7 @@ func (z *StatsMessage) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *StatsMessage) Msgsize() (s int) {
-	s = 1 + 2 + msgp.BytesPrefixSize + len(z.Data) + 2 + msgp.Int64Size + 2 + msgp.Int32Size
+	s = 1 + 2 + msgp.Int64Size + 2 + msgp.Int32Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size
 	return
 }
 
