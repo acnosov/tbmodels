@@ -286,11 +286,20 @@ type BetConfig struct {
 	Exchange      bool               `msg:"x" json:"exchange"`
 	Locked        bool               `msg:"l" json:"locked"`
 }
+
+//	type StatsMessage struct {
+//		Data    []byte `msg:"d" json:"data"`
+//		TS      int64  `msg:"t" json:"ts"`
+//		EventID int32  `msg:"e" json:"event_id"`
+//	}
 type StatsMessage struct {
-	Data    []byte `msg:"d" json:"data"`
-	TS      int64  `msg:"t" json:"ts"`
-	EventID int32  `msg:"e" json:"event_id"`
+	TS          int64 `msg:"t" json:"ts"`
+	EventID     int32 `msg:"e" json:"event_id"`
+	CountEvent  int16 `msg:"c" json:"count_event"`
+	AmountEvent int16 `msg:"a" json:"amount_event"`
+	OpenEvent   int16 `msg:"o" json:"open_event"`
 }
+
 type OrdersMessage struct {
 	Orders []OrderDataMessage `msg:"o" json:"orders"`
 }
