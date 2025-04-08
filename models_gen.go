@@ -9122,9 +9122,9 @@ func (z *SubscriptionStateMessage) DecodeMsg(dc *msgp.Reader) (err error) {
 		}
 		switch msgp.UnsafeString(field) {
 		case "c":
-			z.Count, err = dc.ReadInt16()
+			z.EventFactor, err = dc.ReadFloat64()
 			if err != nil {
-				err = msgp.WrapError(err, "Count")
+				err = msgp.WrapError(err, "EventFactor")
 				return
 			}
 		default:
@@ -9146,9 +9146,9 @@ func (z SubscriptionStateMessage) EncodeMsg(en *msgp.Writer) (err error) {
 	if err != nil {
 		return
 	}
-	err = en.WriteInt16(z.Count)
+	err = en.WriteFloat64(z.EventFactor)
 	if err != nil {
-		err = msgp.WrapError(err, "Count")
+		err = msgp.WrapError(err, "EventFactor")
 		return
 	}
 	return
@@ -9160,7 +9160,7 @@ func (z SubscriptionStateMessage) MarshalMsg(b []byte) (o []byte, err error) {
 	// map header, size 1
 	// string "c"
 	o = append(o, 0x81, 0xa1, 0x63)
-	o = msgp.AppendInt16(o, z.Count)
+	o = msgp.AppendFloat64(o, z.EventFactor)
 	return
 }
 
@@ -9183,9 +9183,9 @@ func (z *SubscriptionStateMessage) UnmarshalMsg(bts []byte) (o []byte, err error
 		}
 		switch msgp.UnsafeString(field) {
 		case "c":
-			z.Count, bts, err = msgp.ReadInt16Bytes(bts)
+			z.EventFactor, bts, err = msgp.ReadFloat64Bytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "Count")
+				err = msgp.WrapError(err, "EventFactor")
 				return
 			}
 		default:
@@ -9202,7 +9202,7 @@ func (z *SubscriptionStateMessage) UnmarshalMsg(bts []byte) (o []byte, err error
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z SubscriptionStateMessage) Msgsize() (s int) {
-	s = 1 + 2 + msgp.Int16Size
+	s = 1 + 2 + msgp.Float64Size
 	return
 }
 

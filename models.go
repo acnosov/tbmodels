@@ -338,5 +338,5 @@ type UniversalMessage struct {
 	Status string `msg:"s" json:"status"`
 }
 type SubscriptionStateMessage struct {
-	Count int16 `msg:"c" json:"id"`
+	EventFactor float64 `msg:"c" json:"c"`
 }
