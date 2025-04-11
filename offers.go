@@ -22,7 +22,8 @@ const (
 // tset -s (set)
 var OfferMap = map[string]AB{
 	//Correct Score
-	"cs": {Kind: NoBet},
+	"qualify": {Kind: NoBet},
+	"cs":      {Kind: NoBet},
 	//Total Between
 	"gr": {Kind: NoBet},
 	//Exact Total

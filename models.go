@@ -340,3 +340,6 @@ type UniversalMessage struct {
 type SubscriptionStateMessage struct {
 	EventFactor float64 `msg:"c" json:"c"`
 }
+type SmkCompetitionsMessage struct {
+	Competitions []int32 `msg:"c" json:"competitions"`
+}

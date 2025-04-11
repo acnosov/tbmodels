@@ -32,6 +32,7 @@ const (
 	StoreBetConfigSubject         = "store.bet_config"
 	StoreStatsSubject             = "store.stats"
 	StoreSubscriptionCountSubject = "store.subscription_count"
+	StoreSmkCompetitionsSubject   = "store.smk_competitions"
 
 	ResultsOrdersSubject = "results.orders"
 
