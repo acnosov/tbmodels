@@ -262,12 +262,6 @@ type BetMessage struct {
 	OrderID      int32         `msg:"o" json:"order_id"`
 }
 
-// type SyncedMessage struct {
-// 	User   string `msg:"n" json:"user"`
-// 	OpenTS int64  `msg:"o" json:"open_ts"`
-// 	WsTS   int64  `msg:"w" json:"ws_ts"`
-// }
-
 type BalanceDB struct {
 	Balance   float64 `msg:"b" json:"balance"`
 	OpenStake float64 `msg:"o" json:"open_stake"`
@@ -287,11 +281,6 @@ type BetConfig struct {
 	Locked        bool               `msg:"l" json:"locked"`
 }
 
-//	type StatsMessage struct {
-//		Data    []byte `msg:"d" json:"data"`
-//		TS      int64  `msg:"t" json:"ts"`
-//		EventID int32  `msg:"e" json:"event_id"`
-//	}
 type StatsMessage struct {
 	TS          int64 `msg:"t" json:"ts"`
 	EventID     int32 `msg:"e" json:"event_id"`
@@ -342,4 +331,10 @@ type SubscriptionStateMessage struct {
 }
 type CompetitionsMessage struct {
 	Competitions []int32 `msg:"c" json:"competitions"`
+}
+
+type HistoryMessage struct {
+	ID    int32  `msg:"i" json:"id"`
+	Offer string `msg:"o" json:"offer"`
+	Data  []byte `msg:"d" json:"data"`
 }

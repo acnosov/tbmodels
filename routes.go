@@ -40,4 +40,8 @@ const (
 	TradebotSurebetSubject = "tradebot.surebet"
 	TradebotCheckSubject   = "tradebot.check"
 	HealBetslipSubject     = "heal.betslip"
+
+	HistoryNextMetaRequest = "history.next_meta"
+	HistoryEventSubject    = "history.event"
+	StoreNextMetaResponse  = "store.next_meta"
 )
