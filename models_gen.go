@@ -5647,9 +5647,9 @@ func (z *HistoryMessage) DecodeMsg(dc *msgp.Reader) (err error) {
 				return
 			}
 		case "o":
-			z.Offer, err = dc.ReadString()
+			z.OfferID, err = dc.ReadInt16()
 			if err != nil {
-				err = msgp.WrapError(err, "Offer")
+				err = msgp.WrapError(err, "OfferID")
 				return
 			}
 		case "d":
@@ -5687,9 +5687,9 @@ func (z *HistoryMessage) EncodeMsg(en *msgp.Writer) (err error) {
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.Offer)
+	err = en.WriteInt16(z.OfferID)
 	if err != nil {
-		err = msgp.WrapError(err, "Offer")
+		err = msgp.WrapError(err, "OfferID")
 		return
 	}
 	// write "d"
@@ -5714,7 +5714,7 @@ func (z *HistoryMessage) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.AppendInt32(o, z.ID)
 	// string "o"
 	o = append(o, 0xa1, 0x6f)
-	o = msgp.AppendString(o, z.Offer)
+	o = msgp.AppendInt16(o, z.OfferID)
 	// string "d"
 	o = append(o, 0xa1, 0x64)
 	o = msgp.AppendBytes(o, z.Data)
@@ -5746,9 +5746,9 @@ func (z *HistoryMessage) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				return
 			}
 		case "o":
-			z.Offer, bts, err = msgp.ReadStringBytes(bts)
+			z.OfferID, bts, err = msgp.ReadInt16Bytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "Offer")
+				err = msgp.WrapError(err, "OfferID")
 				return
 			}
 		case "d":
@@ -5771,7 +5771,7 @@ func (z *HistoryMessage) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *HistoryMessage) Msgsize() (s int) {
-	s = 1 + 2 + msgp.Int32Size + 2 + msgp.StringPrefixSize + len(z.Offer) + 2 + msgp.BytesPrefixSize + len(z.Data)
+	s = 1 + 2 + msgp.Int32Size + 2 + msgp.Int16Size + 2 + msgp.BytesPrefixSize + len(z.Data)
 	return
 }
 
