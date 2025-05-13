@@ -334,7 +334,7 @@ type CompetitionsMessage struct {
 }
 
 type HistoryMessage struct {
-	ID    int32  `msg:"i" json:"id"`
-	Offer string `msg:"o" json:"offer"`
-	Data  []byte `msg:"d" json:"data"`
+	ID      int32  `msg:"i" json:"id"`
+	OfferID int16  `msg:"o" json:"offer"`
+	Data    []byte `msg:"d" json:"data"`
 }
