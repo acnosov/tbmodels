@@ -46,4 +46,5 @@ const (
 	HistoryEventSubject     = "history.event"
 	StoreNextMetaResponse   = "store.next_meta"
 	StoreNextEventResponse  = "store.next_event"
+	StoreBetTypeSubject     = "store.bet_type"
 )
