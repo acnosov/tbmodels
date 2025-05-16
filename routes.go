@@ -41,7 +41,9 @@ const (
 	TradebotCheckSubject   = "tradebot.check"
 	HealBetslipSubject     = "heal.betslip"
 
-	HistoryNextMetaRequest = "history.next_meta"
-	HistoryEventSubject    = "history.event"
-	StoreNextMetaResponse  = "store.next_meta"
+	HistoryNextMetaRequest  = "history.next_meta"
+	HistoryNextEventRequest = "history.next_event"
+	HistoryEventSubject     = "history.event"
+	StoreNextMetaResponse   = "store.next_meta"
+	StoreNextEventResponse  = "store.next_event"
 )

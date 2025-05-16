@@ -334,7 +334,14 @@ type CompetitionsMessage struct {
 }
 
 type HistoryMessage struct {
-	ID      int32  `msg:"i" json:"id"`
-	OfferID int16  `msg:"o" json:"offer"`
-	Data    []byte `msg:"d" json:"data"`
+	ID        int32  `msg:"i" json:"id"`
+	BetTypeID int16  `msg:"b" json:"bet_type_id"`
+	Data      []byte `msg:"d" json:"data"`
+}
+type BetType struct {
+	ID   int16  `msg:"i" json:"id"`
+	Name string `msg:"n" json:"name"`
+}
+type BetTypeList struct {
+	BetTypes []BetType `msg:"b" json:"bet_types"`
 }
