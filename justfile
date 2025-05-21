@@ -5,6 +5,9 @@ gen:
     go generate ./...
     go test -v
 
+get:
+    go get -u ./...
+
 fieldalignment:
     fieldalignment ./...
 

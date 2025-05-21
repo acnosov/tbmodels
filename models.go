@@ -52,6 +52,7 @@ type User struct {
 	SessionID string `msg:"s" json:"-"`
 	ID        uint8  `msg:"i" json:"id"`
 	Active    bool   `msg:"a" json:"active"`
+	Host      string `msg:"h" json:"host"`
 }
 
 // type DynamicConfigRequest struct {
