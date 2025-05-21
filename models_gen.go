@@ -10134,6 +10134,12 @@ func (z *User) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "SessionID")
 				return
 			}
+		case "h":
+			z.Host, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "Host")
+				return
+			}
 		case "i":
 			z.ID, err = dc.ReadUint8()
 			if err != nil {
@@ -10144,12 +10150,6 @@ func (z *User) DecodeMsg(dc *msgp.Reader) (err error) {
 			z.Active, err = dc.ReadBool()
 			if err != nil {
 				err = msgp.WrapError(err, "Active")
-				return
-			}
-		case "h":
-			z.Host, err = dc.ReadString()
-			if err != nil {
-				err = msgp.WrapError(err, "Host")
 				return
 			}
 		default:
@@ -10186,6 +10186,16 @@ func (z *User) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "SessionID")
 		return
 	}
+	// write "h"
+	err = en.Append(0xa1, 0x68)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.Host)
+	if err != nil {
+		err = msgp.WrapError(err, "Host")
+		return
+	}
 	// write "i"
 	err = en.Append(0xa1, 0x69)
 	if err != nil {
@@ -10206,16 +10216,6 @@ func (z *User) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "Active")
 		return
 	}
-	// write "h"
-	err = en.Append(0xa1, 0x68)
-	if err != nil {
-		return
-	}
-	err = en.WriteString(z.Host)
-	if err != nil {
-		err = msgp.WrapError(err, "Host")
-		return
-	}
 	return
 }
 
@@ -10229,15 +10229,15 @@ func (z *User) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "s"
 	o = append(o, 0xa1, 0x73)
 	o = msgp.AppendString(o, z.SessionID)
+	// string "h"
+	o = append(o, 0xa1, 0x68)
+	o = msgp.AppendString(o, z.Host)
 	// string "i"
 	o = append(o, 0xa1, 0x69)
 	o = msgp.AppendUint8(o, z.ID)
 	// string "a"
 	o = append(o, 0xa1, 0x61)
 	o = msgp.AppendBool(o, z.Active)
-	// string "h"
-	o = append(o, 0xa1, 0x68)
-	o = msgp.AppendString(o, z.Host)
 	return
 }
 
@@ -10271,6 +10271,12 @@ func (z *User) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "SessionID")
 				return
 			}
+		case "h":
+			z.Host, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Host")
+				return
+			}
 		case "i":
 			z.ID, bts, err = msgp.ReadUint8Bytes(bts)
 			if err != nil {
@@ -10281,12 +10287,6 @@ func (z *User) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			z.Active, bts, err = msgp.ReadBoolBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "Active")
-				return
-			}
-		case "h":
-			z.Host, bts, err = msgp.ReadStringBytes(bts)
-			if err != nil {
-				err = msgp.WrapError(err, "Host")
 				return
 			}
 		default:
@@ -10303,7 +10303,7 @@ func (z *User) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *User) Msgsize() (s int) {
-	s = 1 + 2 + msgp.StringPrefixSize + len(z.Username) + 2 + msgp.StringPrefixSize + len(z.SessionID) + 2 + msgp.Uint8Size + 2 + msgp.BoolSize + 2 + msgp.StringPrefixSize + len(z.Host)
+	s = 1 + 2 + msgp.StringPrefixSize + len(z.Username) + 2 + msgp.StringPrefixSize + len(z.SessionID) + 2 + msgp.StringPrefixSize + len(z.Host) + 2 + msgp.Uint8Size + 2 + msgp.BoolSize
 	return
 }
 

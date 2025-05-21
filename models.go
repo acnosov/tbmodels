@@ -50,9 +50,9 @@ type EventDBList struct {
 type User struct {
 	Username  string `msg:"u" json:"username"`
 	SessionID string `msg:"s" json:"-"`
+	Host      string `msg:"h" json:"host"`
 	ID        uint8  `msg:"i" json:"id"`
 	Active    bool   `msg:"a" json:"active"`
-	Host      string `msg:"h" json:"host"`
 }
 
 // type DynamicConfigRequest struct {
