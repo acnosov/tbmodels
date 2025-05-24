@@ -82,6 +82,13 @@ type BalanceMessage struct {
 	TS          int64 `msg:"z" json:"ts,omitempty"`
 }
 
+type BalanceDB struct {
+	Balance     float64 `msg:"b" json:"balance"`
+	OpenStake   float64 `msg:"o" json:"open_stake"`
+	SmartCredit float64 `msg:"s" json:"smart_credit"`
+	TS          int64   `msg:"u" json:"ts"`
+	UserID      uint8   `msg:"i" json:"user_id"`
+}
 type XRateMessage struct {
 	Ccy  string  `msg:"c" json:"ccy,omitempty"`
 	Rate float64 `msg:"r" json:"rate,omitempty"`
@@ -261,13 +268,6 @@ type BetMessage struct {
 	OrderCcyRate float64       `msg:"O" json:"order_ccy_rate"`
 	TS           int64         `msg:"z" json:"ts,omitempty"`
 	OrderID      int32         `msg:"o" json:"order_id"`
-}
-
-type BalanceDB struct {
-	Balance   float64 `msg:"b" json:"balance"`
-	OpenStake float64 `msg:"o" json:"open_stake"`
-	TS        int64   `msg:"u" json:"ts"`
-	UserID    uint8   `msg:"i" json:"user_id"`
 }
 
 type BetConfig struct {

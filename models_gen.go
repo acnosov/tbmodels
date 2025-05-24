@@ -189,6 +189,12 @@ func (z *BalanceDB) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "OpenStake")
 				return
 			}
+		case "s":
+			z.SmartCredit, err = dc.ReadFloat64()
+			if err != nil {
+				err = msgp.WrapError(err, "SmartCredit")
+				return
+			}
 		case "u":
 			z.TS, err = dc.ReadInt64()
 			if err != nil {
@@ -214,9 +220,9 @@ func (z *BalanceDB) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *BalanceDB) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 4
+	// map header, size 5
 	// write "b"
-	err = en.Append(0x84, 0xa1, 0x62)
+	err = en.Append(0x85, 0xa1, 0x62)
 	if err != nil {
 		return
 	}
@@ -233,6 +239,16 @@ func (z *BalanceDB) EncodeMsg(en *msgp.Writer) (err error) {
 	err = en.WriteFloat64(z.OpenStake)
 	if err != nil {
 		err = msgp.WrapError(err, "OpenStake")
+		return
+	}
+	// write "s"
+	err = en.Append(0xa1, 0x73)
+	if err != nil {
+		return
+	}
+	err = en.WriteFloat64(z.SmartCredit)
+	if err != nil {
+		err = msgp.WrapError(err, "SmartCredit")
 		return
 	}
 	// write "u"
@@ -261,13 +277,16 @@ func (z *BalanceDB) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *BalanceDB) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 4
+	// map header, size 5
 	// string "b"
-	o = append(o, 0x84, 0xa1, 0x62)
+	o = append(o, 0x85, 0xa1, 0x62)
 	o = msgp.AppendFloat64(o, z.Balance)
 	// string "o"
 	o = append(o, 0xa1, 0x6f)
 	o = msgp.AppendFloat64(o, z.OpenStake)
+	// string "s"
+	o = append(o, 0xa1, 0x73)
+	o = msgp.AppendFloat64(o, z.SmartCredit)
 	// string "u"
 	o = append(o, 0xa1, 0x75)
 	o = msgp.AppendInt64(o, z.TS)
@@ -307,6 +326,12 @@ func (z *BalanceDB) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "OpenStake")
 				return
 			}
+		case "s":
+			z.SmartCredit, bts, err = msgp.ReadFloat64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "SmartCredit")
+				return
+			}
 		case "u":
 			z.TS, bts, err = msgp.ReadInt64Bytes(bts)
 			if err != nil {
@@ -333,7 +358,7 @@ func (z *BalanceDB) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *BalanceDB) Msgsize() (s int) {
-	s = 1 + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Int64Size + 2 + msgp.Uint8Size
+	s = 1 + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Int64Size + 2 + msgp.Uint8Size
 	return
 }
 
