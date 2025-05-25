@@ -72,6 +72,7 @@ type Side struct {
 	WeightedPrice    float64   `msg:"Z"`
 	WeightedVolume   float64   `msg:"v"`
 	WeightedDistance float64   `msg:"d"`
+	StakeReduction   float64   `msg:"sr"`
 	OrderID          int32     `msg:"Q"`
 	Offers           int16     `msg:"o"`
 	Index            int16     `msg:"i"`
