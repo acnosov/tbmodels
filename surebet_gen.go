@@ -1714,6 +1714,12 @@ func (z *SurebetDB) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "Spread")
 				return
 			}
+		case "StakePercent":
+			z.StakePercent, err = dc.ReadFloat64()
+			if err != nil {
+				err = msgp.WrapError(err, "StakePercent")
+				return
+			}
 		case "ID":
 			z.ID, err = dc.ReadInt64()
 			if err != nil {
@@ -1823,9 +1829,9 @@ func (z *SurebetDB) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *SurebetDB) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 29
+	// map header, size 30
 	// write "EventStarts"
-	err = en.Append(0xde, 0x0, 0x1d, 0xab, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x61, 0x72, 0x74, 0x73)
+	err = en.Append(0xde, 0x0, 0x1e, 0xab, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x61, 0x72, 0x74, 0x73)
 	if err != nil {
 		return
 	}
@@ -1959,6 +1965,16 @@ func (z *SurebetDB) EncodeMsg(en *msgp.Writer) (err error) {
 	err = en.WriteFloat64(z.Spread)
 	if err != nil {
 		err = msgp.WrapError(err, "Spread")
+		return
+	}
+	// write "StakePercent"
+	err = en.Append(0xac, 0x53, 0x74, 0x61, 0x6b, 0x65, 0x50, 0x65, 0x72, 0x63, 0x65, 0x6e, 0x74)
+	if err != nil {
+		return
+	}
+	err = en.WriteFloat64(z.StakePercent)
+	if err != nil {
+		err = msgp.WrapError(err, "StakePercent")
 		return
 	}
 	// write "ID"
@@ -2127,9 +2143,9 @@ func (z *SurebetDB) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *SurebetDB) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 29
+	// map header, size 30
 	// string "EventStarts"
-	o = append(o, 0xde, 0x0, 0x1d, 0xab, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x61, 0x72, 0x74, 0x73)
+	o = append(o, 0xde, 0x0, 0x1e, 0xab, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x61, 0x72, 0x74, 0x73)
 	o = msgp.AppendTime(o, z.EventStarts)
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
@@ -2178,6 +2194,9 @@ func (z *SurebetDB) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "Spread"
 	o = append(o, 0xa6, 0x53, 0x70, 0x72, 0x65, 0x61, 0x64)
 	o = msgp.AppendFloat64(o, z.Spread)
+	// string "StakePercent"
+	o = append(o, 0xac, 0x53, 0x74, 0x61, 0x6b, 0x65, 0x50, 0x65, 0x72, 0x63, 0x65, 0x6e, 0x74)
+	o = msgp.AppendFloat64(o, z.StakePercent)
 	// string "ID"
 	o = append(o, 0xa2, 0x49, 0x44)
 	o = msgp.AppendInt64(o, z.ID)
@@ -2337,6 +2356,12 @@ func (z *SurebetDB) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "Spread")
 				return
 			}
+		case "StakePercent":
+			z.StakePercent, bts, err = msgp.ReadFloat64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "StakePercent")
+				return
+			}
 		case "ID":
 			z.ID, bts, err = msgp.ReadInt64Bytes(bts)
 			if err != nil {
@@ -2451,7 +2476,7 @@ func (z *SurebetDB) Msgsize() (s int) {
 	for za0001 := range z.Members {
 		s += z.Members[za0001].Msgsize()
 	}
-	s += 7 + z.Timing.Msgsize() + 15 + msgp.Int64Size + 11 + msgp.Float64Size + 10 + msgp.Float64Size + 19 + msgp.Float64Size + 7 + msgp.Float64Size + 3 + msgp.Int64Size + 8 + msgp.Int32Size + 16 + msgp.Int32Size + 17 + msgp.Int32Size + 21 + msgp.Int16Size + 19 + msgp.Int16Size + 18 + msgp.Int16Size + 22 + msgp.Int16Size + 17 + msgp.Int16Size + 14 + msgp.Int16Size + 16 + msgp.Int16Size + 15 + msgp.Int16Size + 16 + msgp.Int16Size + 15 + msgp.Int16Size + 7 + msgp.Int16Size + 16 + msgp.Int16Size
+	s += 7 + z.Timing.Msgsize() + 15 + msgp.Int64Size + 11 + msgp.Float64Size + 10 + msgp.Float64Size + 19 + msgp.Float64Size + 7 + msgp.Float64Size + 13 + msgp.Float64Size + 3 + msgp.Int64Size + 8 + msgp.Int32Size + 16 + msgp.Int32Size + 17 + msgp.Int32Size + 21 + msgp.Int16Size + 19 + msgp.Int16Size + 18 + msgp.Int16Size + 22 + msgp.Int16Size + 17 + msgp.Int16Size + 14 + msgp.Int16Size + 16 + msgp.Int16Size + 15 + msgp.Int16Size + 16 + msgp.Int16Size + 15 + msgp.Int16Size + 7 + msgp.Int16Size + 16 + msgp.Int16Size
 	return
 }
 

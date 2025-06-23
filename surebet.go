@@ -20,6 +20,7 @@ type SurebetDB struct {
 	CalcGross             float64
 	CalcWinDiffPercent    float64
 	Spread                float64
+	StakePercent          float64
 	ID                    int64
 	EventID               int32
 	StatsAmountLine       int32
