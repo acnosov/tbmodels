@@ -581,6 +581,12 @@ func (z *Side) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "BackupProfit")
 				return
 			}
+		case "er":
+			z.ExpectReturnOrigin, err = dc.ReadFloat64()
+			if err != nil {
+				err = msgp.WrapError(err, "ExpectReturnOrigin")
+				return
+			}
 		case "Q":
 			z.OrderID, err = dc.ReadInt32()
 			if err != nil {
@@ -654,9 +660,9 @@ func (z *Side) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *Side) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 46
+	// map header, size 47
 	// write "ca"
-	err = en.Append(0xde, 0x0, 0x2e, 0xa2, 0x63, 0x61)
+	err = en.Append(0xde, 0x0, 0x2f, 0xa2, 0x63, 0x61)
 	if err != nil {
 		return
 	}
@@ -1022,6 +1028,16 @@ func (z *Side) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "BackupProfit")
 		return
 	}
+	// write "er"
+	err = en.Append(0xa2, 0x65, 0x72)
+	if err != nil {
+		return
+	}
+	err = en.WriteFloat64(z.ExpectReturnOrigin)
+	if err != nil {
+		err = msgp.WrapError(err, "ExpectReturnOrigin")
+		return
+	}
 	// write "Q"
 	err = en.Append(0xa1, 0x51)
 	if err != nil {
@@ -1128,9 +1144,9 @@ func (z *Side) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *Side) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 46
+	// map header, size 47
 	// string "ca"
-	o = append(o, 0xde, 0x0, 0x2e, 0xa2, 0x63, 0x61)
+	o = append(o, 0xde, 0x0, 0x2f, 0xa2, 0x63, 0x61)
 	o = msgp.AppendTime(o, z.CreatedAt)
 	// string "l"
 	o = append(o, 0xa1, 0x6c)
@@ -1244,6 +1260,9 @@ func (z *Side) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "bp"
 	o = append(o, 0xa2, 0x62, 0x70)
 	o = msgp.AppendFloat64(o, z.BackupProfit)
+	// string "er"
+	o = append(o, 0xa2, 0x65, 0x72)
+	o = msgp.AppendFloat64(o, z.ExpectReturnOrigin)
 	// string "Q"
 	o = append(o, 0xa1, 0x51)
 	o = msgp.AppendInt32(o, z.OrderID)
@@ -1524,6 +1543,12 @@ func (z *Side) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "BackupProfit")
 				return
 			}
+		case "er":
+			z.ExpectReturnOrigin, bts, err = msgp.ReadFloat64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "ExpectReturnOrigin")
+				return
+			}
 		case "Q":
 			z.OrderID, bts, err = msgp.ReadInt32Bytes(bts)
 			if err != nil {
@@ -1602,7 +1627,7 @@ func (z *Side) Msgsize() (s int) {
 	for za0001 := range z.PriceList {
 		s += z.PriceList[za0001].Msgsize()
 	}
-	s += 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 3 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 3 + msgp.Float64Size + 3 + msgp.Float64Size + 2 + msgp.Int32Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.BoolSize + 2 + msgp.Uint8Size + 2 + msgp.BoolSize
+	s += 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 3 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 3 + msgp.Float64Size + 3 + msgp.Float64Size + 3 + msgp.Float64Size + 2 + msgp.Int32Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.BoolSize + 2 + msgp.Uint8Size + 2 + msgp.BoolSize
 	return
 }
 
