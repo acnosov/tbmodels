@@ -575,6 +575,12 @@ func (z *Side) DecodeMsg(dc *msgp.Reader) (err error) {
 				err = msgp.WrapError(err, "StakeReduction")
 				return
 			}
+		case "bp":
+			z.BackupProfit, err = dc.ReadFloat64()
+			if err != nil {
+				err = msgp.WrapError(err, "BackupProfit")
+				return
+			}
 		case "Q":
 			z.OrderID, err = dc.ReadInt32()
 			if err != nil {
@@ -648,9 +654,9 @@ func (z *Side) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *Side) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 45
+	// map header, size 46
 	// write "ca"
-	err = en.Append(0xde, 0x0, 0x2d, 0xa2, 0x63, 0x61)
+	err = en.Append(0xde, 0x0, 0x2e, 0xa2, 0x63, 0x61)
 	if err != nil {
 		return
 	}
@@ -1006,6 +1012,16 @@ func (z *Side) EncodeMsg(en *msgp.Writer) (err error) {
 		err = msgp.WrapError(err, "StakeReduction")
 		return
 	}
+	// write "bp"
+	err = en.Append(0xa2, 0x62, 0x70)
+	if err != nil {
+		return
+	}
+	err = en.WriteFloat64(z.BackupProfit)
+	if err != nil {
+		err = msgp.WrapError(err, "BackupProfit")
+		return
+	}
 	// write "Q"
 	err = en.Append(0xa1, 0x51)
 	if err != nil {
@@ -1112,9 +1128,9 @@ func (z *Side) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *Side) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 45
+	// map header, size 46
 	// string "ca"
-	o = append(o, 0xde, 0x0, 0x2d, 0xa2, 0x63, 0x61)
+	o = append(o, 0xde, 0x0, 0x2e, 0xa2, 0x63, 0x61)
 	o = msgp.AppendTime(o, z.CreatedAt)
 	// string "l"
 	o = append(o, 0xa1, 0x6c)
@@ -1225,6 +1241,9 @@ func (z *Side) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "sr"
 	o = append(o, 0xa2, 0x73, 0x72)
 	o = msgp.AppendFloat64(o, z.StakeReduction)
+	// string "bp"
+	o = append(o, 0xa2, 0x62, 0x70)
+	o = msgp.AppendFloat64(o, z.BackupProfit)
 	// string "Q"
 	o = append(o, 0xa1, 0x51)
 	o = msgp.AppendInt32(o, z.OrderID)
@@ -1499,6 +1518,12 @@ func (z *Side) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				err = msgp.WrapError(err, "StakeReduction")
 				return
 			}
+		case "bp":
+			z.BackupProfit, bts, err = msgp.ReadFloat64Bytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "BackupProfit")
+				return
+			}
 		case "Q":
 			z.OrderID, bts, err = msgp.ReadInt32Bytes(bts)
 			if err != nil {
@@ -1577,7 +1602,7 @@ func (z *Side) Msgsize() (s int) {
 	for za0001 := range z.PriceList {
 		s += z.PriceList[za0001].Msgsize()
 	}
-	s += 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 3 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 3 + msgp.Float64Size + 2 + msgp.Int32Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.BoolSize + 2 + msgp.Uint8Size + 2 + msgp.BoolSize
+	s += 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 3 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 3 + msgp.Float64Size + 3 + msgp.Float64Size + 2 + msgp.Int32Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.BoolSize + 2 + msgp.Uint8Size + 2 + msgp.BoolSize
 	return
 }
 
@@ -1627,6 +1652,12 @@ func (z *SurebetDB) DecodeMsg(dc *msgp.Reader) (err error) {
 			z.EventString, err = dc.ReadString()
 			if err != nil {
 				err = msgp.WrapError(err, "EventString")
+				return
+			}
+		case "BaseType":
+			z.BaseType, err = dc.ReadString()
+			if err != nil {
+				err = msgp.WrapError(err, "BaseType")
 				return
 			}
 		case "Members":
@@ -1792,9 +1823,9 @@ func (z *SurebetDB) DecodeMsg(dc *msgp.Reader) (err error) {
 
 // EncodeMsg implements msgp.Encodable
 func (z *SurebetDB) EncodeMsg(en *msgp.Writer) (err error) {
-	// map header, size 28
+	// map header, size 29
 	// write "EventStarts"
-	err = en.Append(0xde, 0x0, 0x1c, 0xab, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x61, 0x72, 0x74, 0x73)
+	err = en.Append(0xde, 0x0, 0x1d, 0xab, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x61, 0x72, 0x74, 0x73)
 	if err != nil {
 		return
 	}
@@ -1841,6 +1872,16 @@ func (z *SurebetDB) EncodeMsg(en *msgp.Writer) (err error) {
 	err = en.WriteString(z.EventString)
 	if err != nil {
 		err = msgp.WrapError(err, "EventString")
+		return
+	}
+	// write "BaseType"
+	err = en.Append(0xa8, 0x42, 0x61, 0x73, 0x65, 0x54, 0x79, 0x70, 0x65)
+	if err != nil {
+		return
+	}
+	err = en.WriteString(z.BaseType)
+	if err != nil {
+		err = msgp.WrapError(err, "BaseType")
 		return
 	}
 	// write "Members"
@@ -2086,9 +2127,9 @@ func (z *SurebetDB) EncodeMsg(en *msgp.Writer) (err error) {
 // MarshalMsg implements msgp.Marshaler
 func (z *SurebetDB) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.Require(b, z.Msgsize())
-	// map header, size 28
+	// map header, size 29
 	// string "EventStarts"
-	o = append(o, 0xde, 0x0, 0x1c, 0xab, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x61, 0x72, 0x74, 0x73)
+	o = append(o, 0xde, 0x0, 0x1d, 0xab, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x61, 0x72, 0x74, 0x73)
 	o = msgp.AppendTime(o, z.EventStarts)
 	// string "Key"
 	o = append(o, 0xa3, 0x4b, 0x65, 0x79)
@@ -2102,6 +2143,9 @@ func (z *SurebetDB) MarshalMsg(b []byte) (o []byte, err error) {
 	// string "EventString"
 	o = append(o, 0xab, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67)
 	o = msgp.AppendString(o, z.EventString)
+	// string "BaseType"
+	o = append(o, 0xa8, 0x42, 0x61, 0x73, 0x65, 0x54, 0x79, 0x70, 0x65)
+	o = msgp.AppendString(o, z.BaseType)
 	// string "Members"
 	o = append(o, 0xa7, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73)
 	o = msgp.AppendArrayHeader(o, uint32(2))
@@ -2231,6 +2275,12 @@ func (z *SurebetDB) UnmarshalMsg(bts []byte) (o []byte, err error) {
 			z.EventString, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "EventString")
+				return
+			}
+		case "BaseType":
+			z.BaseType, bts, err = msgp.ReadStringBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "BaseType")
 				return
 			}
 		case "Members":
@@ -2397,7 +2447,7 @@ func (z *SurebetDB) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *SurebetDB) Msgsize() (s int) {
-	s = 3 + 12 + msgp.TimeSize + 4 + msgp.StringPrefixSize + len(z.Key) + 16 + msgp.StringPrefixSize + len(z.CalcFirstReason) + 11 + msgp.StringPrefixSize + len(z.EventSport) + 12 + msgp.StringPrefixSize + len(z.EventString) + 8 + msgp.ArrayHeaderSize
+	s = 3 + 12 + msgp.TimeSize + 4 + msgp.StringPrefixSize + len(z.Key) + 16 + msgp.StringPrefixSize + len(z.CalcFirstReason) + 11 + msgp.StringPrefixSize + len(z.EventSport) + 12 + msgp.StringPrefixSize + len(z.EventString) + 9 + msgp.StringPrefixSize + len(z.BaseType) + 8 + msgp.ArrayHeaderSize
 	for za0001 := range z.Members {
 		s += z.Members[za0001].Msgsize()
 	}

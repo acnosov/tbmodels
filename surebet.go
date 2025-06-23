@@ -12,6 +12,7 @@ type SurebetDB struct {
 	CalcFirstReason       string
 	EventSport            string
 	EventString           string
+	BaseType              string
 	Members               [2]Side
 	Timing                Timing
 	CalcLastDataTs        int64
@@ -73,6 +74,7 @@ type Side struct {
 	WeightedVolume   float64   `msg:"v"`
 	WeightedDistance float64   `msg:"d"`
 	StakeReduction   float64   `msg:"sr"`
+	BackupProfit     float64   `msg:"bp"`
 	OrderID          int32     `msg:"Q"`
 	Offers           int16     `msg:"o"`
 	Index            int16     `msg:"i"`
