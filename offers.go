@@ -46,6 +46,7 @@ var OfferMap = map[string]AB{
 	//1X2 + Both Score
 	"mo_both_score":               {Kind: NoBet},
 	"time_cs,tp,all":              {Kind: NoBet},
+	"time_cs,thalf,1":             {Kind: NoBet},
 	"time_win,tp,all,sub,180,wdw": {Kind: NoBet}, // darts wdw
 	"time_win,tperiod,1,wdw":      {Kind: NoBet}, // ih wdw
 	"time_win,thalf,1,wdw":        {Kind: NoBet}, // baseball wdw
