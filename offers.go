@@ -104,12 +104,11 @@ var OfferMap = map[string]AB{
 	"time_ah,tmap,4":     {B: "tmap,4,ah,h", A: "tmap,4,ah,a", Short: "hm4", Kind: Handicap},
 	"time_ah,tmap,5":     {B: "tmap,5,ah,h", A: "tmap,5,ah,a", Short: "hm5", Kind: Handicap},
 	// "for,tmap,1,sub,kills,ah,h,-22"
-
-	"time_ah,tmap,1,sub,kills,ah": {B: "for,tmap,1,sub,kills,ah,h", A: "for,tmap,1,sub,kills,ah,a", Short: "ahkm1", Kind: Handicap},
-	"time_ah,tmap,2,sub,kills,ah": {B: "for,tmap,2,sub,kills,ah,h", A: "for,tmap,2,sub,kills,ah,a", Short: "ahkm2", Kind: Handicap},
-	"time_ah,tmap,3,sub,kills,ah": {B: "for,tmap,3,sub,kills,ah,h", A: "for,tmap,3,sub,kills,ah,a", Short: "ahkm3", Kind: Handicap},
-	"time_ah,tmap,4,sub,kills,ah": {B: "for,tmap,4,sub,kills,ah,h", A: "for,tmap,4,sub,kills,ah,a", Short: "ahkm4", Kind: Handicap},
-	"time_ah,tmap,5,sub,kills,ah": {B: "for,tmap,5,sub,kills,ah,h", A: "for,tmap,5,sub,kills,ah,a", Short: "ahkm5", Kind: Handicap},
+	"time_ah,tmap,1,sub,kills,ah": {B: "tmap,1,sub,kills,ah,h", A: "tmap,1,sub,kills,ah,a", Short: "ahkm1", Kind: Handicap},
+	"time_ah,tmap,2,sub,kills,ah": {B: "tmap,2,sub,kills,ah,h", A: "tmap,2,sub,kills,ah,a", Short: "ahkm2", Kind: Handicap},
+	"time_ah,tmap,3,sub,kills,ah": {B: "tmap,3,sub,kills,ah,h", A: "tmap,3,sub,kills,ah,a", Short: "ahkm3", Kind: Handicap},
+	"time_ah,tmap,4,sub,kills,ah": {B: "tmap,4,sub,kills,ah,h", A: "tmap,4,sub,kills,ah,a", Short: "ahkm4", Kind: Handicap},
+	"time_ah,tmap,5,sub,kills,ah": {B: "tmap,5,sub,kills,ah,h", A: "tmap,5,sub,kills,ah,a", Short: "ahkm5", Kind: Handicap},
 
 	// "time_ah,tinnings,1": {B: "tmap,5,ah,h", A: "tmap,5,ah,a", Short: "hm5", Kind: Handicap},
 	// for,thalf,1,ah,h,-2
@@ -135,11 +134,11 @@ var OfferMap = map[string]AB{
 	"time_ahou,tmap,4":    {B: "tmap,4,ahunder", A: "tmap,4,ahover", Short: "tm4", Kind: Handicap},
 	"time_ahou,tmap,5":    {B: "tmap,5,ahunder", A: "tmap,5,ahover", Short: "tm5", Kind: Handicap},
 	// "for,tmap,1,sub,kills,ahover,198"
-	"time_ahou,tmap,1,sub,kills": {B: "for,tmap,1,sub,kills,ahunder", A: "for,tmap,1,sub,kills,ahover", Short: "tkm1", Kind: Handicap},
-	"time_ahou,tmap,2,sub,kills": {B: "for,tmap,2,sub,kills,ahunder", A: "for,tmap,2,sub,kills,ahover", Short: "tkm2", Kind: Handicap},
-	"time_ahou,tmap,3,sub,kills": {B: "for,tmap,3,sub,kills,ahunder", A: "for,tmap,3,sub,kills,ahover", Short: "tkm3", Kind: Handicap},
-	"time_ahou,tmap,4,sub,kills": {B: "for,tmap,4,sub,kills,ahunder", A: "for,tmap,4,sub,kills,ahover", Short: "tkm4", Kind: Handicap},
-	"time_ahou,tmap,5,sub,kills": {B: "for,tmap,5,sub,kills,ahunder", A: "for,tmap,5,sub,kills,ahover", Short: "tkm5", Kind: Handicap},
+	"time_ahou,tmap,1,sub,kills": {B: "tmap,1,sub,kills,ahunder", A: "tmap,1,sub,kills,ahover", Short: "tkm1", Kind: Handicap},
+	"time_ahou,tmap,2,sub,kills": {B: "tmap,2,sub,kills,ahunder", A: "tmap,2,sub,kills,ahover", Short: "tkm2", Kind: Handicap},
+	"time_ahou,tmap,3,sub,kills": {B: "tmap,3,sub,kills,ahunder", A: "tmap,3,sub,kills,ahover", Short: "tkm3", Kind: Handicap},
+	"time_ahou,tmap,4,sub,kills": {B: "tmap,4,sub,kills,ahunder", A: "tmap,4,sub,kills,ahover", Short: "tkm4", Kind: Handicap},
+	"time_ahou,tmap,5,sub,kills": {B: "tmap,5,sub,kills,ahunder", A: "tmap,5,sub,kills,ahover", Short: "tkm5", Kind: Handicap},
 
 	// "time_ahou,tinnings,1":     {B: "tmap,5,ahunder", A: "tmap,5,ahover", Short: "tm5", Kind: Handicap},
 
@@ -163,11 +162,11 @@ var OfferMap = map[string]AB{
 	"time_tahou,tmap,4,h":    {B: "tmap,4,tahunder,h", A: "tmap,4,tahover,h", Short: "thm4", Kind: Handicap},
 	"time_tahou,tmap,5,h":    {B: "tmap,5,tahunder,h", A: "tmap,5,tahover,h", Short: "thm5", Kind: Handicap},
 	// "for,tmap,1,sub,kills,tahover,h,110"
-	"time_tahou,tmap,1,sub,kills,h": {B: "for,tmap,1,sub,kills,tahunder,h", A: "for,tmap,1,sub,kills,tahover,h", Short: "thkm1", Kind: Handicap},
-	"time_tahou,tmap,2,sub,kills,h": {B: "for,tmap,2,sub,kills,tahunder,h", A: "for,tmap,2,sub,kills,tahover,h", Short: "thkm2", Kind: Handicap},
-	"time_tahou,tmap,3,sub,kills,h": {B: "for,tmap,3,sub,kills,tahunder,h", A: "for,tmap,3,sub,kills,tahover,h", Short: "thkm3", Kind: Handicap},
-	"time_tahou,tmap,4,sub,kills,h": {B: "for,tmap,4,sub,kills,tahunder,h", A: "for,tmap,4,sub,kills,tahover,h", Short: "thkm4", Kind: Handicap},
-	"time_tahou,tmap,5,sub,kills,h": {B: "for,tmap,5,sub,kills,tahunder,h", A: "for,tmap,5,sub,kills,tahover,h", Short: "thkm5", Kind: Handicap},
+	"time_tahou,tmap,1,sub,kills,h": {B: "tmap,1,sub,kills,tahunder,h", A: "tmap,1,sub,kills,tahover,h", Short: "thkm1", Kind: Handicap},
+	"time_tahou,tmap,2,sub,kills,h": {B: "tmap,2,sub,kills,tahunder,h", A: "tmap,2,sub,kills,tahover,h", Short: "thkm2", Kind: Handicap},
+	"time_tahou,tmap,3,sub,kills,h": {B: "tmap,3,sub,kills,tahunder,h", A: "tmap,3,sub,kills,tahover,h", Short: "thkm3", Kind: Handicap},
+	"time_tahou,tmap,4,sub,kills,h": {B: "tmap,4,sub,kills,tahunder,h", A: "tmap,4,sub,kills,tahover,h", Short: "thkm4", Kind: Handicap},
+	"time_tahou,tmap,5,sub,kills,h": {B: "tmap,5,sub,kills,tahunder,h", A: "tmap,5,sub,kills,tahover,h", Short: "thkm5", Kind: Handicap},
 
 	// away total and different periods (14)
 	"tahou,a":                 {B: "tahunder,a", A: "tahover,a", Short: "ta", Kind: Handicap},
@@ -189,11 +188,11 @@ var OfferMap = map[string]AB{
 	"time_tahou,tmap,4,a":    {B: "tmap,4,tahunder,a", A: "tmap,4,tahover,a", Short: "tam4", Kind: Handicap},
 	"time_tahou,tmap,5,a":    {B: "tmap,5,tahunder,a", A: "tmap,5,tahover,a", Short: "tam5", Kind: Handicap},
 	// "for,tmap,1,sub,kills,tahover,a,94"
-	"time_tahou,tmap,1,sub,kills,a": {B: "for,tmap,1,sub,kills,tahunder,a", A: "for,tmap,1,sub,kills,tahover,a", Short: "takm1", Kind: Handicap},
-	"time_tahou,tmap,2,sub,kills,a": {B: "for,tmap,2,sub,kills,tahunder,a", A: "for,tmap,2,sub,kills,tahover,a", Short: "takm2", Kind: Handicap},
-	"time_tahou,tmap,3,sub,kills,a": {B: "for,tmap,3,sub,kills,tahunder,a", A: "for,tmap,3,sub,kills,tahover,a", Short: "takm3", Kind: Handicap},
-	"time_tahou,tmap,4,sub,kills,a": {B: "for,tmap,4,sub,kills,tahunder,a", A: "for,tmap,4,sub,kills,tahover,a", Short: "takm4", Kind: Handicap},
-	"time_tahou,tmap,5,sub,kills,a": {B: "for,tmap,5,sub,kills,tahunder,a", A: "for,tmap,5,sub,kills,tahover,a", Short: "takm5", Kind: Handicap},
+	"time_tahou,tmap,1,sub,kills,a": {B: "tmap,1,sub,kills,tahunder,a", A: "tmap,1,sub,kills,tahover,a", Short: "takm1", Kind: Handicap},
+	"time_tahou,tmap,2,sub,kills,a": {B: "tmap,2,sub,kills,tahunder,a", A: "tmap,2,sub,kills,tahover,a", Short: "takm2", Kind: Handicap},
+	"time_tahou,tmap,3,sub,kills,a": {B: "tmap,3,sub,kills,tahunder,a", A: "tmap,3,sub,kills,tahover,a", Short: "takm3", Kind: Handicap},
+	"time_tahou,tmap,4,sub,kills,a": {B: "tmap,4,sub,kills,tahunder,a", A: "tmap,4,sub,kills,tahover,a", Short: "takm4", Kind: Handicap},
+	"time_tahou,tmap,5,sub,kills,a": {B: "tmap,5,sub,kills,tahunder,a", A: "tmap,5,sub,kills,tahover,a", Short: "takm5", Kind: Handicap},
 
 	// tennis match and periods
 	// this market allows you to bet on the outright winner of the entire match, regardless of the number of sets played.
