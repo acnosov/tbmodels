@@ -104,11 +104,11 @@ var OfferMap = map[string]AB{
 	"time_ah,tmap,4":     {B: "tmap,4,ah,h", A: "tmap,4,ah,a", Short: "hm4", Kind: Handicap},
 	"time_ah,tmap,5":     {B: "tmap,5,ah,h", A: "tmap,5,ah,a", Short: "hm5", Kind: Handicap},
 	// "for,tmap,1,sub,kills,ah,h,-22"
-	"time_ah,tmap,1,sub,kills,ah": {B: "tmap,1,sub,kills,ah,h", A: "tmap,1,sub,kills,ah,a", Short: "ahkm1", Kind: Handicap},
-	"time_ah,tmap,2,sub,kills,ah": {B: "tmap,2,sub,kills,ah,h", A: "tmap,2,sub,kills,ah,a", Short: "ahkm2", Kind: Handicap},
-	"time_ah,tmap,3,sub,kills,ah": {B: "tmap,3,sub,kills,ah,h", A: "tmap,3,sub,kills,ah,a", Short: "ahkm3", Kind: Handicap},
-	"time_ah,tmap,4,sub,kills,ah": {B: "tmap,4,sub,kills,ah,h", A: "tmap,4,sub,kills,ah,a", Short: "ahkm4", Kind: Handicap},
-	"time_ah,tmap,5,sub,kills,ah": {B: "tmap,5,sub,kills,ah,h", A: "tmap,5,sub,kills,ah,a", Short: "ahkm5", Kind: Handicap},
+	"time_ah,tmap,1,sub,kills": {B: "tmap,1,sub,kills,ah,h", A: "tmap,1,sub,kills,ah,a", Short: "ahkm1", Kind: Handicap},
+	"time_ah,tmap,2,sub,kills": {B: "tmap,2,sub,kills,ah,h", A: "tmap,2,sub,kills,ah,a", Short: "ahkm2", Kind: Handicap},
+	"time_ah,tmap,3,sub,kills": {B: "tmap,3,sub,kills,ah,h", A: "tmap,3,sub,kills,ah,a", Short: "ahkm3", Kind: Handicap},
+	"time_ah,tmap,4,sub,kills": {B: "tmap,4,sub,kills,ah,h", A: "tmap,4,sub,kills,ah,a", Short: "ahkm4", Kind: Handicap},
+	"time_ah,tmap,5,sub,kills": {B: "tmap,5,sub,kills,ah,h", A: "tmap,5,sub,kills,ah,a", Short: "ahkm5", Kind: Handicap},
 
 	// "time_ah,tinnings,1": {B: "tmap,5,ah,h", A: "tmap,5,ah,a", Short: "hm5", Kind: Handicap},
 	// for,thalf,1,ah,h,-2
