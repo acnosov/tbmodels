@@ -207,6 +207,48 @@ var OfferMap = map[string]AB{
 	"tennis_match,4": {B: "for,tset,4,vwhatever,p2", A: "for,tset,4,vwhatever,p1", Short: "ml4", Kind: Moneyline},
 	// bet on the winner of the set 5 in the match. (Set 5 Winner)
 	"tennis_match,5": {B: "for,tset,5,vwhatever,p2", A: "for,tset,5,vwhatever,p1", Short: "ml5", Kind: Moneyline},
+
+	// "for,tgame,1,1,vwhatever,p1"
+	"tennis_game_win,1,1":  {B: "for,tgame,1,1,vwhatever,p2", A: "for,tgame,1,1,vwhatever,p1", Short: "mls1g1", Kind: Moneyline},
+	"tennis_game_win,1,2":  {B: "for,tgame,1,2,vwhatever,p2", A: "for,tgame,1,2,vwhatever,p1", Short: "mls1g2", Kind: Moneyline},
+	"tennis_game_win,1,3":  {B: "for,tgame,1,3,vwhatever,p2", A: "for,tgame,1,3,vwhatever,p1", Short: "mls1g3", Kind: Moneyline},
+	"tennis_game_win,1,4":  {B: "for,tgame,1,4,vwhatever,p2", A: "for,tgame,1,4,vwhatever,p1", Short: "mls1g4", Kind: Moneyline},
+	"tennis_game_win,1,5":  {B: "for,tgame,1,5,vwhatever,p2", A: "for,tgame,1,5,vwhatever,p1", Short: "mls1g5", Kind: Moneyline},
+	"tennis_game_win,1,6":  {B: "for,tgame,1,6,vwhatever,p2", A: "for,tgame,1,6,vwhatever,p1", Short: "mls1g6", Kind: Moneyline},
+	"tennis_game_win,1,7":  {B: "for,tgame,1,7,vwhatever,p2", A: "for,tgame,1,7,vwhatever,p1", Short: "mls1g7", Kind: Moneyline},
+	"tennis_game_win,1,8":  {B: "for,tgame,1,8,vwhatever,p2", A: "for,tgame,1,8,vwhatever,p1", Short: "mls1g8", Kind: Moneyline},
+	"tennis_game_win,1,9":  {B: "for,tgame,1,9,vwhatever,p2", A: "for,tgame,1,9,vwhatever,p1", Short: "mls1g9", Kind: Moneyline},
+	"tennis_game_win,1,10": {B: "for,tgame,1,10,vwhatever,p2", A: "for,tgame,1,10,vwhatever,p1", Short: "mls1g10", Kind: Moneyline},
+	"tennis_game_win,1,11": {B: "for,tgame,1,11,vwhatever,p2", A: "for,tgame,1,11,vwhatever,p1", Short: "mls1g11", Kind: Moneyline},
+	"tennis_game_win,1,12": {B: "for,tgame,1,12,vwhatever,p2", A: "for,tgame,1,12,vwhatever,p1", Short: "mls1g12", Kind: Moneyline},
+	"tennis_game_win,1,13": {B: "for,tgame,1,13,vwhatever,p2", A: "for,tgame,1,13,vwhatever,p1", Short: "mls1g13", Kind: Moneyline},
+	"tennis_game_win,2,1":  {B: "for,tgame,2,1,vwhatever,p2", A: "for,tgame,2,1,vwhatever,p1", Short: "mls2g1", Kind: Moneyline},
+	"tennis_game_win,2,2":  {B: "for,tgame,2,2,vwhatever,p2", A: "for,tgame,2,2,vwhatever,p1", Short: "mls2g2", Kind: Moneyline},
+	"tennis_game_win,2,3":  {B: "for,tgame,2,3,vwhatever,p2", A: "for,tgame,2,3,vwhatever,p1", Short: "mls2g3", Kind: Moneyline},
+	"tennis_game_win,2,4":  {B: "for,tgame,2,4,vwhatever,p2", A: "for,tgame,2,4,vwhatever,p1", Short: "mls2g4", Kind: Moneyline},
+	"tennis_game_win,2,5":  {B: "for,tgame,2,5,vwhatever,p2", A: "for,tgame,2,5,vwhatever,p1", Short: "mls2g5", Kind: Moneyline},
+	"tennis_game_win,2,6":  {B: "for,tgame,2,6,vwhatever,p2", A: "for,tgame,2,6,vwhatever,p1", Short: "mls2g6", Kind: Moneyline},
+	"tennis_game_win,2,7":  {B: "for,tgame,2,7,vwhatever,p2", A: "for,tgame,2,7,vwhatever,p1", Short: "mls2g7", Kind: Moneyline},
+	"tennis_game_win,2,8":  {B: "for,tgame,2,8,vwhatever,p2", A: "for,tgame,2,8,vwhatever,p1", Short: "mls2g8", Kind: Moneyline},
+	"tennis_game_win,2,9":  {B: "for,tgame,2,9,vwhatever,p2", A: "for,tgame,2,9,vwhatever,p1", Short: "mls2g9", Kind: Moneyline},
+	"tennis_game_win,2,10": {B: "for,tgame,2,10,vwhatever,p2", A: "for,tgame,2,10,vwhatever,p1", Short: "mls2g10", Kind: Moneyline},
+	"tennis_game_win,2,11": {B: "for,tgame,2,11,vwhatever,p2", A: "for,tgame,2,11,vwhatever,p1", Short: "mls2g11", Kind: Moneyline},
+	"tennis_game_win,2,12": {B: "for,tgame,2,12,vwhatever,p2", A: "for,tgame,2,12,vwhatever,p1", Short: "mls2g12", Kind: Moneyline},
+	"tennis_game_win,2,13": {B: "for,tgame,2,13,vwhatever,p2", A: "for,tgame,2,13,vwhatever,p1", Short: "mls2g13", Kind: Moneyline},
+	"tennis_game_win,3,1":  {B: "for,tgame,3,1,vwhatever,p2", A: "for,tgame,3,1,vwhatever,p1", Short: "mls3g1", Kind: Moneyline},
+	"tennis_game_win,3,2":  {B: "for,tgame,3,2,vwhatever,p2", A: "for,tgame,3,2,vwhatever,p1", Short: "mls3g2", Kind: Moneyline},
+	"tennis_game_win,3,3":  {B: "for,tgame,3,3,vwhatever,p2", A: "for,tgame,3,3,vwhatever,p1", Short: "mls3g3", Kind: Moneyline},
+	"tennis_game_win,3,4":  {B: "for,tgame,3,4,vwhatever,p2", A: "for,tgame,3,4,vwhatever,p1", Short: "mls3g4", Kind: Moneyline},
+	"tennis_game_win,3,5":  {B: "for,tgame,3,5,vwhatever,p2", A: "for,tgame,3,5,vwhatever,p1", Short: "mls3g5", Kind: Moneyline},
+	"tennis_game_win,3,6":  {B: "for,tgame,3,6,vwhatever,p2", A: "for,tgame,3,6,vwhatever,p1", Short: "mls3g6", Kind: Moneyline},
+	"tennis_game_win,3,7":  {B: "for,tgame,3,7,vwhatever,p2", A: "for,tgame,3,7,vwhatever,p1", Short: "mls3g7", Kind: Moneyline},
+	"tennis_game_win,3,8":  {B: "for,tgame,3,8,vwhatever,p2", A: "for,tgame,3,8,vwhatever,p1", Short: "mls3g8", Kind: Moneyline},
+	"tennis_game_win,3,9":  {B: "for,tgame,3,9,vwhatever,p2", A: "for,tgame,3,9,vwhatever,p1", Short: "mls3g9", Kind: Moneyline},
+	"tennis_game_win,3,10": {B: "for,tgame,3,10,vwhatever,p2", A: "for,tgame,3,10,vwhatever,p1", Short: "mls3g10", Kind: Moneyline},
+	"tennis_game_win,3,11": {B: "for,tgame,3,11,vwhatever,p2", A: "for,tgame,3,11,vwhatever,p1", Short: "mls3g11", Kind: Moneyline},
+	"tennis_game_win,3,12": {B: "for,tgame,3,12,vwhatever,p2", A: "for,tgame,3,12,vwhatever,p1", Short: "mls3g12", Kind: Moneyline},
+	"tennis_game_win,3,13": {B: "for,tgame,3,13,vwhatever,p2", A: "for,tgame,3,13,vwhatever,p1", Short: "mls3g13", Kind: Moneyline},
+
 	// tennis handicap and totals
 	// in this market, handicaps are applied to the total number of games won throughout the entire match.
 	"tennis_ah,all,game": {B: "tset,all,vwhatever,game,ah,p2", A: "tset,all,vwhatever,game,ah,p1", Short: "h", Kind: Handicap},
@@ -236,11 +278,10 @@ var OfferMap = map[string]AB{
 	"tennis_ahou,all,game": {B: "tset,all,vwhatever,game,ahunder", A: "tset,all,vwhatever,game,ahover", Short: "t", Kind: Handicap},
 }
 
-// 2025-09-23T08:10:35.554Z	WARN	unknown_offer	{"user": "osnosov", "key": "tennis_game_win,3,12", "value": [[null,[["p1",0.0],["p2",0.0]]]], "event": [384,"tennis","2025-09-23,12293,67153"]}
 // 2025-09-23T08:10:35.554Z	WARN	unknown_offer	{"user": "osnosov", "key": "tennis_games_tahou,all,game,p1", "value": [[50,[["over",2.04],["under",1.793]]]], "event": [384,"tennis","2025-09-23,12293,67153"]}
-// 2025-09-23T08:10:35.554Z	WARN	unknown_offer	{"user": "osnosov", "key": "tennis_game_win,1,7", "value": [[null,[["p1",0.0],["p2",0.0]]]], "event": [384,"tennis","2025-09-23,12293,67153"]}
 // 2025-09-23T08:11:21.405Z	WARN	unknown_offer	{"user": "osnosov", "key": "tennis_games_tahou,all,game,p1", "value": [[50,[["over",2.08],["under",1.763]]]], "event": [384,"tennis","2025-09-23,12293,67153"]}
 // 2025-09-23T08:11:21.405Z	WARN	unknown_offer	{"user": "osnosov", "key": "tennis_games_tahou,all,game,p2", "value": [[32,[["over",1.917],["under",1.9]]]], "event": [384,"tennis","2025-09-23,12293,67153"]}
+
 // done list
 // 2025-09-23T00:14:06.955Z	WARN	unknown_offer	{"user": "komartetia", "key": "time_win,tquarter,3,ml", "value": [[null,null]], "event": [545,"af","2025-09-23,21616,21624"]}
 // 2025-09-23T00:14:06.955Z	WARN	unknown_offer	{"user": "komartetia", "key": "time_ah,tquarter,3", "value": [[-6,null]], "event": [545,"af","2025-09-23,21616,21624"]}
@@ -252,3 +293,5 @@ var OfferMap = map[string]AB{
 // 2025-09-23T08:02:24.065Z	WARN	unknown_offer	{"user": "acblack", "key": "time_ahou,tmap,1,sub,kills", "value": [[126,null],[130,null],[134,null]], "event": [10003308,"esports","2025-09-23,10068598,10058500"]}
 // 2025-09-23T06:49:13.468Z	WARN	unknown_offer	{"user": "acblack", "key": "time_tahou,tmap,1,sub,kills,h", "value": [[82,[["over",1.9],["under",1.769]]]], "event": [10005202,"esports","2025-09-23,10026748,10028149"]}
 // 2025-09-23T06:49:13.468Z	WARN	unknown_offer	{"user": "acblack", "key": "time_tahou,tmap,1,sub,kills,a", "value": [[34,[["over",1.806],["under",1.862]]]], "event": [10005202,"esports","2025-09-23,10026748,10028149"]}
+// 2025-09-23T08:10:35.554Z	WARN	unknown_offer	{"user": "osnosov", "key": "tennis_game_win,1,7", "value": [[null,[["p1",0.0],["p2",0.0]]]], "event": [384,"tennis","2025-09-23,12293,67153"]}
+// 2025-09-23T08:10:35.554Z	WARN	unknown_offer	{"user": "osnosov", "key": "tennis_game_win,3,12", "value": [[null,[["p1",0.0],["p2",0.0]]]], "event": [384,"tennis","2025-09-23,12293,67153"]}
