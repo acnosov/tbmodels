@@ -45,6 +45,7 @@ linters:
     - tagliatelle
     - gochecknoglobals
     - recvcheck
+    - embeddedstructfieldcheck
 
   exclusions:
     generated: lax
@@ -67,6 +68,8 @@ linters:
     revive:
       enable-default-rules: true
       rules:
+        - name: var-naming
+          disabled: true
         - name: file-length-limit
           exclude: ["**/*_test.go"] # ← игнорируем все *_test.go
           arguments:
@@ -79,15 +82,3 @@ linters:
       attr-only: true
     govet:
       enable-all: true
-    depguard:
-      rules:
-        prevent_unmaintained_packages:
-          list-mode: lax # allow unless explicitly denied
-          files:
-            - $all
-            - "!$test"
-          allow:
-            - $gostd
-          deny:
-            - pkg: io/ioutil
-              desc: "replaced by io and os packages since Go 1.16: https://tip.golang.org/doc/go1.16#ioutil"

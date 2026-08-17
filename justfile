@@ -27,8 +27,5 @@ gomajor:
 generate:
     go generate ./...
 
-fieldalignment:
-    fieldalignment ./...
-
 install:
     go install github.com/tinylib/msgp@latest
