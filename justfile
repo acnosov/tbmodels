@@ -1,12 +1,27 @@
 default:
-    echo 'Hello, world!'
+    just --choose
 
-gen:
-    go generate ./...
-    go test -v
+update: get-go get install tidy gomajor generate check
+get-go:
+    go get go@latest
 
 get:
-    go get -u ./...
+    go get -u -t ./...
+tidy:
+    go mod tidy -v
+
+test:
+    go test ./...
+lint:
+    golangci-lint run
+check: test lint
+fmt:
+    golangci-lint fmt
+gomajor:
+    gomajor list
+
+generate:
+    go generate ./...
 
 fieldalignment:
     fieldalignment ./...

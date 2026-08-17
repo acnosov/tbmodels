@@ -1,0 +1,89 @@
+# yaml-language-server: $schema=https://json.schemastore.org/golangci-lint.json
+version: "2"
+run:
+  timeout: 2m
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  fix: false
+formatters: #https://golangci-lint.run/docs/formatters/
+  enable:
+    - gofumpt #https://github.com/mvdan/gofumpt
+    - goimports #https://golangci-lint.run/docs/formatters/configuration/#goimports
+    - golines #https://golangci-lint.run/docs/formatters/configuration/#golines
+  settings:
+    gofumpt:
+      extra-rules: true
+    golines:
+      max-len: 160 # default is 100; lll is disabled, this is the only line length limit
+      reformat-tags: false # linters do it better.
+  exclusions: #Use linters.exclusions.paths and formatters.exclusions.paths to exclude directories.
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+      - genfiles$
+      - vendor$
+      - tmp
+
+linters:
+  default: all
+  disable:
+    - wsl # deprecated.
+    - gomodguard # deprecated.
+    - wsl_v5 # Disabled: Overly strict whitespace rules that reduce readability
+    - nlreturn # formatting https://github.com/ssgreg/nlreturn
+    - exhaustruct # Disabled: Forces all struct fields to be set explicitly, makes code verbose
+    - lll # restricts maximum line length; annoying
+    - varnamelen
+    - testpackage
+    - paralleltest
+    - noinlineerr # disallows `if err := ...`; because why miss an opportunity to leak variables out of scope?
+    - goconst # wants repeated test strings and other obvious literals to be constants; lots of churn.
+
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+      - genfiles$
+      - vendor$
+      - bin$
+
+  settings:
+    # https://golangci-lint.run/docs/linters/configuration/#revive
+    # GL_DEBUG=revive golangci-lint run --enable-only=revive
+    revive:
+      enable-default-rules: true
+      rules:
+        - name: file-length-limit
+          exclude: ["**/*_test.go"] # ← игнорируем все *_test.go
+          arguments:
+            - max: 140
+              # skip-comments: true # не считать строки, состоящие только из комментариев
+              # skip-blank-lines: true # не считать пустые строки
+    sloglint:
+      context: "scope" # Or "scope".
+      msg-style: "lowercased" # Or "capitalized".
+      attr-only: true
+    govet:
+      enable-all: true
+    depguard:
+      rules:
+        prevent_unmaintained_packages:
+          list-mode: lax # allow unless explicitly denied
+          files:
+            - $all
+            - "!$test"
+          allow:
+            - $gostd
+          deny:
+            - pkg: io/ioutil
+              desc: "replaced by io and os packages since Go 1.16: https://tip.golang.org/doc/go1.16#ioutil"
