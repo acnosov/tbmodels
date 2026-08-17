@@ -29,7 +29,8 @@ type EventKey struct {
 }
 
 type EventWatch struct {
-	EventKey      `msg:"k"`
+	EventKey `msg:"k"`
+
 	CompetitionID int32 `msg:"c"`
 }
 
@@ -54,25 +55,6 @@ type User struct {
 	ID        uint8  `msg:"i" json:"id"`
 	Active    bool   `msg:"a" json:"active"`
 }
-
-// type DynamicConfigRequest struct {
-// 	Username string `msg:"n" json:"username"`
-// }
-
-// type DynamicConfigResponse struct {
-// 	User      User   `msg:"r" json:"user"`
-// 	UserAgent string `msg:"a" json:"user_agent"`
-// 	Error     *Error `msg:"x" json:"error,omitempty"`
-// }
-
-// type Error struct {
-// 	Code uint16 `msg:"c" json:"code"`
-// 	Msg  string `msg:"m" json:"msg"`
-// }
-
-// func (e Error) Error() string {
-// 	return fmt.Sprintf("status:%d, msg:%s", e.Code, e.Msg)
-// }
 
 type BalanceMessage struct {
 	Balance     []any `msg:"b" json:"balance"`
@@ -122,7 +104,7 @@ type BetslipClosedMessage struct {
 	BetslipId   string `msg:"b" json:"betslip_id"`
 	CloseReason string `msg:"c" json:"close_reason"`
 	TS          int64  `msg:"z" json:"ts,omitempty"`
-	//SendTime    time.Time `msg:"s"`
+	// SendTime    time.Time `msg:"s"`
 }
 
 // type DisconnectedMessage struct {
@@ -175,7 +157,7 @@ type PmmMessage struct {
 	Status    Status      `msg:"st" json:"status"`
 	PriceList []PriceList `msg:"p" json:"price_list"`
 	TS        int64       `msg:"z" json:"ts,omitempty"`
-	//SendTime  time.Time
+	// SendTime  time.Time
 }
 
 type PriceList struct {
@@ -183,9 +165,9 @@ type PriceList struct {
 }
 
 type Effective struct {
-	Min   []interface{} `msg:"m" json:"min"`
-	Max   []interface{} `msg:"M" json:"max"`
-	Price float64       `msg:"p" json:"price"`
+	Min   []any   `msg:"m" json:"min"`
+	Max   []any   `msg:"M" json:"max"`
+	Price float64 `msg:"p" json:"price"`
 }
 
 type SyncMessage struct {
@@ -250,30 +232,30 @@ type EventInfo struct {
 }
 
 type BetMessage struct {
-	Status       Status        `msg:"st" json:"status"`
-	GotPrice     *float64      `msg:"g" json:"got_price,omitempty"`
-	ExchangeRole *string       `msg:"x" json:"exchange_role,omitempty"`
-	Reconciled   *bool         `msg:"r" json:"reconciled,omitempty"`
-	Username     string        `msg:"n" json:"username"`
-	Sport        string        `msg:"s" json:"sport"`
-	BetType      string        `msg:"y" json:"bet_type"`
-	Bookie       string        `msg:"k" json:"bookie"`
-	EventID      string        `msg:"e" json:"event_id"`
-	ProfitLoss   []interface{} `msg:"p" json:"profit_loss,omitempty"`
-	WantStake    []interface{} `msg:"j" json:"want_stake,omitempty"`
-	GotStake     []interface{} `msg:"h" json:"got_stake,omitempty"`
-	CcyRate      float64       `msg:"c" json:"ccy_rate"`
-	BetID        int64         `msg:"i" json:"bet_id"`
-	WantPrice    float64       `msg:"w" json:"want_price"`
-	OrderCcyRate float64       `msg:"O" json:"order_ccy_rate"`
-	TS           int64         `msg:"z" json:"ts,omitempty"`
-	OrderID      int32         `msg:"o" json:"order_id"`
+	Status       Status   `msg:"st" json:"status"`
+	GotPrice     *float64 `msg:"g" json:"got_price,omitempty"`
+	ExchangeRole *string  `msg:"x" json:"exchange_role,omitempty"`
+	Reconciled   *bool    `msg:"r" json:"reconciled,omitempty"`
+	Username     string   `msg:"n" json:"username"`
+	Sport        string   `msg:"s" json:"sport"`
+	BetType      string   `msg:"y" json:"bet_type"`
+	Bookie       string   `msg:"k" json:"bookie"`
+	EventID      string   `msg:"e" json:"event_id"`
+	ProfitLoss   []any    `msg:"p" json:"profit_loss,omitempty"`
+	WantStake    []any    `msg:"j" json:"want_stake,omitempty"`
+	GotStake     []any    `msg:"h" json:"got_stake,omitempty"`
+	CcyRate      float64  `msg:"c" json:"ccy_rate"`
+	BetID        int64    `msg:"i" json:"bet_id"`
+	WantPrice    float64  `msg:"w" json:"want_price"`
+	OrderCcyRate float64  `msg:"O" json:"order_ccy_rate"`
+	TS           int64    `msg:"z" json:"ts,omitempty"`
+	OrderID      int32    `msg:"o" json:"order_id"`
 }
 
 type BetConfig struct {
-	Bookie        string             `msg:"b" json:"bookie"`
 	BetSportFail  map[string]float64 `msg:"c" json:"bet_sport_fail"`
 	SideSportFail map[string]float64 `msg:"s" json:"side_sport_fail"`
+	Bookie        string             `msg:"b" json:"bookie"`
 	BetFail       float64            `msg:"f" json:"bet_fail"`
 	AvgFail       float64            `msg:"a" json:"avg_fail"`
 	ROI           float64            `msg:"r" json:"roi"`
@@ -324,8 +306,8 @@ type CheckMessage struct {
 	Index   int16   `msg:"i" json:"index"`
 }
 type UniversalMessage struct {
-	ID     int16  `msg:"i" json:"id"`
 	Status string `msg:"s" json:"status"`
+	ID     int16  `msg:"i" json:"id"`
 }
 type SubscriptionStateMessage struct {
 	EventFactor float64 `msg:"c" json:"c"`
@@ -335,13 +317,13 @@ type CompetitionsMessage struct {
 }
 
 type HistoryMessage struct {
+	Data      []byte `msg:"d" json:"data"`
 	ID        int32  `msg:"i" json:"id"`
 	BetTypeID int16  `msg:"b" json:"bet_type_id"`
-	Data      []byte `msg:"d" json:"data"`
 }
 type BetType struct {
-	ID   int16  `msg:"i" json:"id"`
 	Name string `msg:"n" json:"name"`
+	ID   int16  `msg:"i" json:"id"`
 }
 type BetTypeList struct {
 	BetTypes []BetType `msg:"b" json:"bet_types"`

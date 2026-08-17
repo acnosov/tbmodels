@@ -1,6 +1,6 @@
 package tbmodels
 
-// Subject srtucture: Producer.EventType
+// Subject structure: Producer.EventType.
 const (
 	WebsocketEventSubject         = "websocket.event"
 	WebsocketXrateSubject         = "websocket.xrate"

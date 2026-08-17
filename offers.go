@@ -13,37 +13,38 @@ const (
 	NoBet        = 5
 )
 
+// OfferMap periods:
 // all - o (inc.Overtime)
 // reg - r (regular time)
 // tperiod -p (period)
 // thalf -h (half)
 // tmap -m (map)
 // tquarter -q (quarter)
-// tset -s (set)
+// tset -s (set).
 var OfferMap = map[string]AB{
-	//Correct Score
+	// Correct Score
 	"qualify": {Kind: NoBet},
 	"cs":      {Kind: NoBet},
-	//Total Between
+	// Total Between
 	"gr": {Kind: NoBet},
-	//Exact Total
+	// Exact Total
 	"exact_total": {Kind: NoBet},
-	//Win by
+	// Win by
 	"wm": {Kind: NoBet},
-	//1X2 and O/U
+	// 1X2 and O/U
 	"moou": {Kind: NoBet},
-	//1X2+O
+	// 1X2+O
 	"aou": {Kind: NoBet},
-	//Set Score
+	// Set Score
 	"tennis_cs,all,set": {Kind: NoBet},
-	//1 X 2 (reg. time)
+	// 1 X 2 (reg. time)
 	"time_win,tp,reg,wdw": {Kind: NoBet},
 	"time_win,tp,all,wdw": {Kind: NoBet},
-	//1 X 2 (reg. time)
+	// 1 X 2 (reg. time)
 	"time_win,tinnings,1,wdw": {Kind: NoBet},
-	"time_ah,tinnings,1":      {Kind: NoBet}, //todo: check if avail in web version
-	"time_ahou,tinnings,1":    {Kind: NoBet}, //todo: check if avail in web version
-	//1X2 + Both Score
+	"time_ah,tinnings,1":      {Kind: NoBet},
+	"time_ahou,tinnings,1":    {Kind: NoBet},
+	// 1X2 + Both Score
 	"mo_both_score":               {Kind: NoBet},
 	"time_cs,tp,all":              {Kind: NoBet},
 	"time_cs,thalf,1":             {Kind: NoBet},
