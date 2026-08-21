@@ -13,9 +13,12 @@ formatters: #https://golangci-lint.run/docs/formatters/
     - golines #https://golangci-lint.run/docs/formatters/configuration/#golines
   settings:
     gofumpt:
-      extra-rules: true
+      extra:
+        group-params: true
+        clothe-returns: true
+        balance-calls: true
     golines:
-      max-len: 160 # default is 100; lll is disabled, this is the only line length limit
+      max-len: 240 # default is 100; lll is disabled, this is the only line length limit
       reformat-tags: false # linters do it better.
   exclusions: #Use linters.exclusions.paths and formatters.exclusions.paths to exclude directories.
     generated: lax
@@ -46,6 +49,7 @@ linters:
     - gochecknoglobals
     - recvcheck
     - embeddedstructfieldcheck
+    - exhaustruct_v5
 
   exclusions:
     generated: lax

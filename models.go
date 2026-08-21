@@ -313,7 +313,11 @@ type SubscriptionStateMessage struct {
 	EventFactor float64 `msg:"c" json:"c"`
 }
 type CompetitionsMessage struct {
-	Competitions []int32 `msg:"c" json:"competitions"`
+	Sport         string `msg:"s" json:"sport"`
+	CompetitionID int32  `msg:"c" json:"competition_id"`
+}
+type CompetitionsList struct {
+	Competitions []CompetitionsMessage `msg:"c" json:"competitions"`
 }
 
 type HistoryMessage struct {
