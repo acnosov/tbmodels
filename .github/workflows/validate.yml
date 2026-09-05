@@ -1,0 +1,19 @@
+name: validate
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main # https://github.com/actions/checkout
+      - uses: actions/setup-go@main # https://github.com/actions/setup-go
+        with:
+          go-version: stable
+      - run: go build ./...
+      - run: go test ./...
+      - uses: golangci/golangci-lint-action@v9 # https://github.com/golangci/golangci-lint-action
