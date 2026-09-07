@@ -77,7 +77,7 @@ type Side struct {
 	StakeReduction     float64   `msg:"sr"`
 	BackupProfit       float64   `msg:"bp"`
 	ExpectReturnOrigin float64   `msg:"er"`
-	OrderID            int32     `msg:"Q"`
+	OrderID            int64     `msg:"Q"`
 	Offers             int16     `msg:"o"`
 	Index              int16     `msg:"i"`
 	TryBetCount        int16     `msg:"t"`

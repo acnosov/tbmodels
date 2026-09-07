@@ -203,7 +203,7 @@ type OrderDataMessage struct {
 	WantPrice          float64      `msg:"w" json:"want_price"`
 	CcyRate            float64      `msg:"c" json:"ccy_rate"`
 	TS                 int64        `msg:"g" json:"ts,omitempty"`
-	OrderID            int32        `msg:"i" json:"order_id"`
+	OrderID            int64        `msg:"i" json:"order_id"`
 	Closed             bool         `msg:"l" json:"closed"`
 	KeepOpenIr         bool         `msg:"h" json:"keep_open_ir"`
 }
@@ -249,7 +249,7 @@ type BetMessage struct {
 	WantPrice    float64  `msg:"w" json:"want_price"`
 	OrderCcyRate float64  `msg:"O" json:"order_ccy_rate"`
 	TS           int64    `msg:"z" json:"ts,omitempty"`
-	OrderID      int32    `msg:"o" json:"order_id"`
+	OrderID      int64    `msg:"o" json:"order_id"`
 }
 
 type BetConfig struct {
