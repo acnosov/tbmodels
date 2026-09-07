@@ -1,6 +1,6 @@
 module github.com/acnosov/tbmodels
 
-go 1.27.0
+go 1.27.1
 
 require github.com/tinylib/msgp v1.6.4
 

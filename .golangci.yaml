@@ -9,17 +9,12 @@ issues:
 formatters: #https://golangci-lint.run/docs/formatters/
   enable:
     - gofumpt #https://github.com/mvdan/gofumpt
-    - goimports #https://golangci-lint.run/docs/formatters/configuration/#goimports
-    - golines #https://golangci-lint.run/docs/formatters/configuration/#golines
   settings:
     gofumpt:
       extra:
         group-params: true
         clothe-returns: true
         balance-calls: true
-    golines:
-      max-len: 240 # default is 100; lll is disabled, this is the only line length limit
-      reformat-tags: false # linters do it better.
   exclusions: #Use linters.exclusions.paths and formatters.exclusions.paths to exclude directories.
     generated: lax
     paths:
@@ -27,9 +22,6 @@ formatters: #https://golangci-lint.run/docs/formatters/
       - builtin$
       - examples$
       - genfiles$
-      - vendor$
-      - tmp
-
 linters:
   default: all
   disable:
@@ -38,6 +30,7 @@ linters:
     - wsl_v5 # Disabled: Overly strict whitespace rules that reduce readability
     - nlreturn # formatting https://github.com/ssgreg/nlreturn
     - exhaustruct # Disabled: Forces all struct fields to be set explicitly, makes code verbose
+    - exhaustruct_v5
     - lll # restricts maximum line length; annoying
     - varnamelen
     - testpackage
@@ -49,8 +42,7 @@ linters:
     - gochecknoglobals
     - recvcheck
     - embeddedstructfieldcheck
-    - exhaustruct_v5
-
+    - musttag
   exclusions:
     generated: lax
     presets:
@@ -63,9 +55,6 @@ linters:
       - builtin$
       - examples$
       - genfiles$
-      - vendor$
-      - bin$
-
   settings:
     # https://golangci-lint.run/docs/linters/configuration/#revive
     # GL_DEBUG=revive golangci-lint run --enable-only=revive
