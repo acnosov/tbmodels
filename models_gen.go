@@ -1724,7 +1724,7 @@ func (z *BetMessage) DecodeMsg(dc *msgp.Reader) (err error) {
 				return
 			}
 		case "o":
-			z.OrderID, err = dc.ReadInt32()
+			z.OrderID, err = dc.ReadInt64()
 			if err != nil {
 				err = msgp.WrapError(err, "OrderID")
 				return
@@ -1983,7 +1983,7 @@ func (z *BetMessage) EncodeMsg(en *msgp.Writer) (err error) {
 	if err != nil {
 		return
 	}
-	err = en.WriteInt32(z.OrderID)
+	err = en.WriteInt64(z.OrderID)
 	if err != nil {
 		err = msgp.WrapError(err, "OrderID")
 		return
@@ -2091,7 +2091,7 @@ func (z *BetMessage) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.AppendInt64(o, z.TS)
 	// string "o"
 	o = append(o, 0xa1, 0x6f)
-	o = msgp.AppendInt32(o, z.OrderID)
+	o = msgp.AppendInt64(o, z.OrderID)
 	return
 }
 
@@ -2328,7 +2328,7 @@ func (z *BetMessage) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				return
 			}
 		case "o":
-			z.OrderID, bts, err = msgp.ReadInt32Bytes(bts)
+			z.OrderID, bts, err = msgp.ReadInt64Bytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "OrderID")
 				return
@@ -2383,7 +2383,7 @@ func (z *BetMessage) Msgsize() (s int) {
 	for za0003 := range z.GotStake {
 		s += msgp.GuessSize(z.GotStake[za0003])
 	}
-	s += 2 + msgp.Float64Size + 2 + msgp.Int64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Int64Size + 2 + msgp.Int32Size
+	s += 2 + msgp.Float64Size + 2 + msgp.Int64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Int64Size + 2 + msgp.Int64Size
 	return
 }
 
@@ -7395,7 +7395,7 @@ func (z *OrderDataMessage) DecodeMsg(dc *msgp.Reader) (err error) {
 				return
 			}
 		case "i":
-			z.OrderID, err = dc.ReadInt32()
+			z.OrderID, err = dc.ReadInt64()
 			if err != nil {
 				err = msgp.WrapError(err, "OrderID")
 				return
@@ -7700,7 +7700,7 @@ func (z *OrderDataMessage) EncodeMsg(en *msgp.Writer) (err error) {
 	if err != nil {
 		return
 	}
-	err = en.WriteInt32(z.OrderID)
+	err = en.WriteInt64(z.OrderID)
 	if err != nil {
 		err = msgp.WrapError(err, "OrderID")
 		return
@@ -7847,7 +7847,7 @@ func (z *OrderDataMessage) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.AppendInt64(o, z.TS)
 	// string "i"
 	o = append(o, 0xa1, 0x69)
-	o = msgp.AppendInt32(o, z.OrderID)
+	o = msgp.AppendInt64(o, z.OrderID)
 	// string "l"
 	o = append(o, 0xa1, 0x6c)
 	o = msgp.AppendBool(o, z.Closed)
@@ -8095,7 +8095,7 @@ func (z *OrderDataMessage) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				return
 			}
 		case "i":
-			z.OrderID, bts, err = msgp.ReadInt32Bytes(bts)
+			z.OrderID, bts, err = msgp.ReadInt64Bytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "OrderID")
 				return
@@ -8158,7 +8158,7 @@ func (z *OrderDataMessage) Msgsize() (s int) {
 	for za0005 := range z.BetBookieList {
 		s += msgp.StringPrefixSize + len(z.BetBookieList[za0005])
 	}
-	s += 2 + z.EventInfo.Msgsize() + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Int64Size + 2 + msgp.Int32Size + 2 + msgp.BoolSize + 2 + msgp.BoolSize
+	s += 2 + z.EventInfo.Msgsize() + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Int64Size + 2 + msgp.Int64Size + 2 + msgp.BoolSize + 2 + msgp.BoolSize
 	return
 }
 

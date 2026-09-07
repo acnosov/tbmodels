@@ -588,7 +588,7 @@ func (z *Side) DecodeMsg(dc *msgp.Reader) (err error) {
 				return
 			}
 		case "Q":
-			z.OrderID, err = dc.ReadInt32()
+			z.OrderID, err = dc.ReadInt64()
 			if err != nil {
 				err = msgp.WrapError(err, "OrderID")
 				return
@@ -1043,7 +1043,7 @@ func (z *Side) EncodeMsg(en *msgp.Writer) (err error) {
 	if err != nil {
 		return
 	}
-	err = en.WriteInt32(z.OrderID)
+	err = en.WriteInt64(z.OrderID)
 	if err != nil {
 		err = msgp.WrapError(err, "OrderID")
 		return
@@ -1265,7 +1265,7 @@ func (z *Side) MarshalMsg(b []byte) (o []byte, err error) {
 	o = msgp.AppendFloat64(o, z.ExpectReturnOrigin)
 	// string "Q"
 	o = append(o, 0xa1, 0x51)
-	o = msgp.AppendInt32(o, z.OrderID)
+	o = msgp.AppendInt64(o, z.OrderID)
 	// string "o"
 	o = append(o, 0xa1, 0x6f)
 	o = msgp.AppendInt16(o, z.Offers)
@@ -1550,7 +1550,7 @@ func (z *Side) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				return
 			}
 		case "Q":
-			z.OrderID, bts, err = msgp.ReadInt32Bytes(bts)
+			z.OrderID, bts, err = msgp.ReadInt64Bytes(bts)
 			if err != nil {
 				err = msgp.WrapError(err, "OrderID")
 				return
@@ -1627,7 +1627,7 @@ func (z *Side) Msgsize() (s int) {
 	for za0001 := range z.PriceList {
 		s += z.PriceList[za0001].Msgsize()
 	}
-	s += 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 3 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 3 + msgp.Float64Size + 3 + msgp.Float64Size + 3 + msgp.Float64Size + 2 + msgp.Int32Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.BoolSize + 2 + msgp.Uint8Size + 2 + msgp.BoolSize
+	s += 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 3 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 2 + msgp.Float64Size + 3 + msgp.Float64Size + 3 + msgp.Float64Size + 3 + msgp.Float64Size + 2 + msgp.Int64Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.Int16Size + 2 + msgp.BoolSize + 2 + msgp.Uint8Size + 2 + msgp.BoolSize
 	return
 }
 
