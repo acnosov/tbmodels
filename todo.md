@@ -1,4 +1,3 @@
-
 ## offers.go
 
 - `offers.go:44`: Check whether `time_ah,tinnings,1` is available in the web version.

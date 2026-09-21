@@ -2,3 +2,13 @@
 .idea/
 .vscode/
 .env
+.agents/
+_temp/
+build/
+cover.out
+.skillshare/
+# BEGIN SKILLSHARE MANAGED - DO NOT EDIT
+logs/
+trash/
+backups/
+# END SKILLSHARE MANAGED

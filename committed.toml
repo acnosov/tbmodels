@@ -13,5 +13,5 @@ allowed_types = [
   "build",
   "ci",
   "chore",
-  "revert"
+  "revert",
 ]

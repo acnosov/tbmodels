@@ -1,0 +1,4 @@
+# https://github.com/crate-ci/typos — report-only (run via `task typos`)
+# thr/thq/thm* are upstream API market codes, not typos.
+[default]
+extend-ignore-re = ['\bth[rqm][0-9]?\b']
