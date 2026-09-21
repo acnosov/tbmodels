@@ -1,0 +1,6 @@
+# Only the skillshare manifest is tracked. Skill sources are vendored
+# locally by `skillshare install -p` and synced as symlinks into the
+# gitignored .agents/skills target by `skillshare sync -p`.
+agents/
+logs/
+skills/
