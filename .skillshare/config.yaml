@@ -1,0 +1,72 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/runkids/skillshare/main/schemas/project-config.schema.json
+targets:
+  - agents
+skills:
+  - name: golang-benchmark
+    source: github.com/samber/cc-skills-golang/skills/golang-benchmark
+  - name: golang-code-style
+    source: github.com/samber/cc-skills-golang/skills/golang-code-style
+  - name: golang-concurrency
+    source: github.com/samber/cc-skills-golang/skills/golang-concurrency
+  - name: golang-context
+    source: github.com/samber/cc-skills-golang/skills/golang-context
+  - name: golang-continuous-integration
+    source: github.com/samber/cc-skills-golang/skills/golang-continuous-integration
+  - name: golang-data-structures
+    source: github.com/samber/cc-skills-golang/skills/golang-data-structures
+  - name: golang-database
+    source: github.com/samber/cc-skills-golang/skills/golang-database
+  - name: golang-dependency-injection
+    source: github.com/samber/cc-skills-golang/skills/golang-dependency-injection
+  - name: golang-dependency-management
+    source: github.com/samber/cc-skills-golang/skills/golang-dependency-management
+  - name: golang-design-patterns
+    source: github.com/samber/cc-skills-golang/skills/golang-design-patterns
+  - name: golang-documentation
+    source: github.com/samber/cc-skills-golang/skills/golang-documentation
+  - name: golang-error-handling
+    source: github.com/samber/cc-skills-golang/skills/golang-error-handling
+  - name: golang-gopls
+    source: github.com/samber/cc-skills-golang/skills/golang-gopls
+  - name: golang-how-to
+    source: github.com/samber/cc-skills-golang/skills/golang-how-to
+  - name: golang-lint
+    source: github.com/samber/cc-skills-golang/skills/golang-lint
+  - name: golang-modernize
+    source: github.com/samber/cc-skills-golang/skills/golang-modernize
+  - name: golang-naming
+    source: github.com/samber/cc-skills-golang/skills/golang-naming
+  - name: golang-observability
+    source: github.com/samber/cc-skills-golang/skills/golang-observability
+  - name: golang-performance
+    source: github.com/samber/cc-skills-golang/skills/golang-performance
+  - name: golang-pkg-go-dev
+    source: github.com/samber/cc-skills-golang/skills/golang-pkg-go-dev
+  - name: golang-popular-libraries
+    source: github.com/samber/cc-skills-golang/skills/golang-popular-libraries
+  - name: golang-project-layout
+    source: github.com/samber/cc-skills-golang/skills/golang-project-layout
+  - name: golang-refactoring
+    source: github.com/samber/cc-skills-golang/skills/golang-refactoring
+  - name: golang-safety
+    source: github.com/samber/cc-skills-golang/skills/golang-safety
+  - name: golang-security
+    source: github.com/samber/cc-skills-golang/skills/golang-security
+  - name: golang-stay-updated
+    source: github.com/samber/cc-skills-golang/skills/golang-stay-updated
+  - name: golang-stretchr-testify
+    source: github.com/samber/cc-skills-golang/skills/golang-stretchr-testify
+  - name: golang-structs-interfaces
+    source: github.com/samber/cc-skills-golang/skills/golang-structs-interfaces
+  - name: golang-testing
+    source: github.com/samber/cc-skills-golang/skills/golang-testing
+  - name: golang-troubleshooting
+    source: github.com/samber/cc-skills-golang/skills/golang-troubleshooting
+  - name: golang-pro
+    source: github.com/jeffallan/claude-skills/skills/golang-pro
+ignore:
+  - .DS_Store
+  - .git/
+  - __pycache__/
+audit:
+  block_threshold: CRITICAL
