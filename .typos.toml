@@ -2,3 +2,6 @@
 # thr/thq/thm* are upstream API market codes, not typos.
 [default]
 extend-ignore-re = ['\bth[rqm][0-9]?\b']
+
+[files]
+extend-exclude = ["go.mod", "go.sum", "CHANGELOG.md"]
