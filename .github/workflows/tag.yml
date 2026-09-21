@@ -30,3 +30,4 @@ jobs:
         with:
           command: bump
           args: --auto
+          token: ${{ secrets.RELEASE_TOKEN }}
