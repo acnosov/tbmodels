@@ -319,16 +319,3 @@ type CompetitionsMessage struct {
 type CompetitionsList struct {
 	Competitions []CompetitionsMessage `msg:"c" json:"competitions"`
 }
-
-type HistoryMessage struct {
-	Data      []byte `msg:"d" json:"data"`
-	ID        int32  `msg:"i" json:"id"`
-	BetTypeID int16  `msg:"b" json:"bet_type_id"`
-}
-type BetType struct {
-	Name string `msg:"n" json:"name"`
-	ID   int16  `msg:"i" json:"id"`
-}
-type BetTypeList struct {
-	BetTypes []BetType `msg:"b" json:"bet_types"`
-}
