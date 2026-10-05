@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.2.0 - 2026-10-05
+#### Features
+- add websocket configuration snapshot contract - (fe9dfe5) - acnosov
+
+- - -
+
 ## v0.1.1 - 2026-09-22
 #### Bug Fixes
 - drop unused token input from cocogitto action - (b4bb451) - acnosov
