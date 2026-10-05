@@ -35,6 +35,11 @@ const (
 	StoreSmkCompetitionsSubject      = "store.smk_competitions"
 	StoreCompetitionsWithBetsSubject = "store.competitions_with_bets"
 
+	// StoreWebsocketConfigRequestSubject accepts PingMessage requests and replies with WebsocketConfigSnapshot.
+	StoreWebsocketConfigRequestSubject = "store.websocket.config.request"
+	// StoreWebsocketConfigChangedSubject carries PingMessage invalidation hints, not configuration data.
+	StoreWebsocketConfigChangedSubject = "store.websocket.config.changed"
+
 	ResultsOrdersSubject = "results.orders"
 
 	TradebotSurebetSubject = "tradebot.surebet"
