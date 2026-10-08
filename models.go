@@ -56,6 +56,10 @@ type User struct {
 	Active    bool   `msg:"a" json:"active"`
 }
 
+type UsersList struct {
+	Users []User `msg:"u" json:"users"`
+}
+
 type BalanceMessage struct {
 	Balance     []any `msg:"b" json:"balance"`
 	OpenStake   []any `msg:"o" json:"open_stake"`

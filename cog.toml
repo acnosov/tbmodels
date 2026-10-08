@@ -17,6 +17,15 @@ post_package_bump_hooks = []
 [git_hooks]
 
 [commit_types]
+build = { bump_patch = true }
+chore = { bump_patch = true }
+ci = { bump_patch = true }
+docs = { bump_patch = true }
+perf = { bump_patch = true }
+refactor = { bump_patch = true }
+revert = { bump_patch = true }
+style = { bump_patch = true }
+test = { bump_patch = true }
 
 [changelog]
 path = "CHANGELOG.md"
