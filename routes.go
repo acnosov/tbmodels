@@ -28,6 +28,7 @@ const (
 	StoreSettingsSubject             = "store.settings"
 	StoreBalanceSubject              = "store.balance"
 	StoreUserSubject                 = "store.user"
+	StoreUsersSubject                = "store.users"
 	StoreXrateSubject                = "store.xrate"
 	StoreBetConfigSubject            = "store.bet_config"
 	StoreStatsSubject                = "store.stats"
