@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.3.0 - 2026-10-08
+#### Features
+- add users list message and store.users subject - (b1ff5e2) - acnosov
+
+- - -
+
 ## v0.2.0 - 2026-10-05
 #### Features
 - add websocket configuration snapshot contract - (fe9dfe5) - acnosov
