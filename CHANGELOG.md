@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.4.0 - 2026-10-10
+#### Features
+- mark tennis team game totals as nobet - (3a59002) - acnosov
+#### Miscellaneous Chores
+- lower coverage threshold to 50 - (847482e) - acnosov
+
+- - -
+
 ## v0.3.0 - 2026-10-08
 #### Features
 - add users list message and store.users subject - (b1ff5e2) - acnosov
