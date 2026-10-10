@@ -45,12 +45,14 @@ var OfferMap = map[string]AB{
 	"time_ah,tinnings,1":      {Kind: NoBet},
 	"time_ahou,tinnings,1":    {Kind: NoBet},
 	// 1X2 + Both Score
-	"mo_both_score":               {Kind: NoBet},
-	"time_cs,tp,all":              {Kind: NoBet},
-	"time_cs,thalf,1":             {Kind: NoBet},
-	"time_win,tp,all,sub,180,wdw": {Kind: NoBet}, // darts wdw
-	"time_win,tperiod,1,wdw":      {Kind: NoBet}, // ih wdw
-	"time_win,thalf,1,wdw":        {Kind: NoBet}, // baseball wdw
+	"mo_both_score":                  {Kind: NoBet},
+	"time_cs,tp,all":                 {Kind: NoBet},
+	"time_cs,thalf,1":                {Kind: NoBet},
+	"time_win,tp,all,sub,180,wdw":    {Kind: NoBet}, // darts wdw
+	"time_win,tperiod,1,wdw":         {Kind: NoBet}, // ih wdw
+	"time_win,thalf,1,wdw":           {Kind: NoBet}, // baseball wdw
+	"tennis_games_tahou,all,game,p1": {Kind: NoBet},
+	"tennis_games_tahou,all,game,p2": {Kind: NoBet},
 
 	"wdw":          {Kind: WDW},
 	"dc":           {Kind: DoubleChance},
